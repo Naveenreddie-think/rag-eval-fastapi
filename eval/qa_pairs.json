@@ -1,0 +1,12 @@
+{
+  "_schema_note": "Placeholder. Step 4 fills this with 75-100 hand-written pairs. Each entry follows the shape below. Delete this note key before running anything against the file.",
+  "qa_pairs": [
+    {
+      "id": "example_0001",
+      "question": "Example: How do you declare a path parameter with a type hint in FastAPI?",
+      "answer": "Example placeholder answer -- to be replaced with a real, source-verified answer.",
+      "category": "single_hop",
+      "source_chunks": ["path/to/doc.md#section-header"]
+    }
+  ]
+}
