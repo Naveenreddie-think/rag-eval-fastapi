@@ -1,0 +1,24 @@
+# Step 1 -- ingestion
+requests
+python-dotenv
+
+# Step 2 -- embeddings + vector store
+qdrant-client
+# embedding model client TBD in Step 2 (openai / sentence-transformers / voyageai)
+
+# Step 3 -- hybrid retrieval + reranking
+rank-bm25
+sentence-transformers  # cross-encoder reranker
+
+# Step 4/5 -- evaluation
+ragas
+
+# Step 7 -- serving
+fastapi
+uvicorn
+streamlit
+
+# testing
+pytest
+
+anthropic
