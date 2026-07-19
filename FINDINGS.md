@@ -42,6 +42,70 @@ hybrid comparison, especially query 3, where BM25 keyword matching on
 
 "async" and "sync" might do better than semantic similarity alone.
 
+\### Step 3: hybrid + rerank vs dense-only (4 queries)
+
+
+
+| Query | Dense-only top result | Hybrid+rerank top result | Verdict |
+
+|---|---|---|---|
+
+| Path parameter type hint | path-params.md (correct) | same (correct) | No change |
+
+| Dependency injection | dependencies/index.md (correct, canonical) | background-tasks.md (tangential) | \*\*Hybrid regressed\*\* -- BM25 exact-match on header text ("Dependency Injection") promoted a tangential page over the canonical explanation |
+
+| async vs sync | Weak, scattered (0.646 top score) | Still weak (rerank scores 0.38-0.76, \~10-20x lower than clean queries' 4-8 range) | Confirms corpus genuinely lacks a dedicated page -- low absolute rerank score is itself a useful low-confidence signal |
+
+| response\_model in decorator | response-model.md (correct) | same (correct) | No change |
+
+
+
+\*\*Honest takeaway\*\*: hybrid+rerank is not a uniform improvement over
+
+dense-only on this corpus/query set. It didn't fix the structurally weak
+
+query, and it actively demoted a canonical result on one query due to an
+
+exact keyword match on a tangential page's header. Worth revisiting
+
+fusion weighting (e.g. down-weighting BM25 relative to dense, or RRF's
+
+k constant) in Step 5 rather than assuming hybrid is strictly better.
+
+
+
+\### Latency breakdown (per-stage, warm cross-encoder, 4-query average)
+
+
+
+| Stage | Latency | Notes |
+
+|---|---|---|
+
+| Dense search | \~410-555ms | Network round-trip to Qdrant Cloud dominates -- query embedding itself is fast on GPU |
+
+| BM25 search | \~4-6ms | Local, in-memory -- effectively free |
+
+| RRF fusion | <0.1ms | Negligible |
+
+| Cross-encoder rerank | \~120-340ms | Runs on GPU, over a small (20-candidate) pool, not the full corpus |
+
+
+
+\*\*System-design takeaway\*\*: dense search is the latency bottleneck by
+
+\~2 orders of magnitude versus BM25, almost entirely due to network
+
+round-trip to a remote free-tier cluster rather than compute cost. If
+
+latency budget were tight, the first lever to pull would be a
+
+locally-hosted Qdrant instance (removing the network hop) or caching
+
+repeated/similar queries, not cutting the reranking or BM25 stages,
+
+which are already cheap.
+
 ### Retrieval precision/recall
 
 (table goes here -- per config)
@@ -76,13 +140,13 @@ taxonomy.
 
 \*\*Bug 3 -- cross-platform path separator mismatch.\*\*
 
-`load\_local\_docs()` used `str(md\_path.relative\_to(docs\_root))` to build
+`load\\\_local\\\_docs()` used `str(md\\\_path.relative\\\_to(docs\\\_root))` to build
 
-each chunk's `source\_path`. On Linux this produces forward slashes
+each chunk's `source\\\_path`. On Linux this produces forward slashes
 
 (`tutorial/metadata.md`); on Windows, `pathlib` produces backslashes
 
-(`tutorial\\metadata.md`). Tests that only checked non-emptiness or counts
+(`tutorial\\\\metadata.md`). Tests that only checked non-emptiness or counts
 
 passed on both platforms; tests that matched an exact source\_path string
 
@@ -96,13 +160,13 @@ kind of platform-specific bug Project 1's `sys.executable` note existed
 
 to pre-empt, and this one slipped through anyway. Fixed by replacing
 
-`str(path.relative\_to(root))` with `path.relative\_to(root).as\_posix()`,
+`str(path.relative\\\_to(root))` with `path.relative\\\_to(root).as\\\_posix()`,
 
 which forces forward slashes regardless of OS. Any future code that
 
-stores or compares `source\_path` (the eval set in Step 4 especially)
+stores or compares `source\\\_path` (the eval set in Step 4 especially)
 
-depends on this being consistent -- worth remembering why `as\_posix()`
+depends on this being consistent -- worth remembering why `as\\\_posix()`
 
 is there, not just that it is.
 
