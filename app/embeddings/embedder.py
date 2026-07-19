@@ -24,9 +24,8 @@ _model: SentenceTransformer | None = None
 def _get_model() -> SentenceTransformer:
     global _model
     if _model is None:
-        _model = SentenceTransformer(_MODEL_NAME)
+        _model = SentenceTransformer(_MODEL_NAME, device="cuda")
     return _model
-
 
 def embed(texts: list[str]) -> list[list[float]]:
     model = _get_model()

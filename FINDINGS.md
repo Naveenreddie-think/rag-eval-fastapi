@@ -6,19 +6,41 @@ prominently as successes. Nothing goes in this file until it's measured.
 
 ## Architecture \& Design Decisions
 
-State each choice with its reasoning and rejected alternative -- not
-just a components list. Fill in as decisions get made (not upfront):
-
-* **Corpus**: FastAPI docs (Tutorial + Advanced User Guide subset).
-Reason: widely known, verifiable, structurally messy enough for real
-chunking decisions. Rejected: Qdrant-only, Qdrant+FastAPI combined
-(see chat log for full reasoning).
-* **Chunking strategy**: TBD in Step 5 (swept, not assumed).
-* **Embedding model**: TBD in Step 2/5 (swept, not assumed).
-* **Vector DB**: Qdrant. Reason: TBD -- fill in after Step 2.
-* **Retrieval mode (dense vs hybrid vs hybrid+rerank)**: TBD in Step 5.
+* \- \*\*Embedding model\*\*: BGE-M3 (`BAAI/bge-m3`), running on GPU (RTX 5060
+* &#x20; Laptop, sm\_120/Blackwell). Required installing PyTorch nightly with
+* &#x20; cu128 -- stable cu124/cu128 builds don't yet ship compiled kernels for
+* &#x20; sm\_120 ("no kernel image is available for execution on the device").
+* &#x20; Rejected: all-MiniLM-L6-v2 as the default (considered as a CPU fallback
+* &#x20; during debugging, kept as a possible fast/dev-iteration option for
+* &#x20; Step 5's sweep instead).
+* \- \*\*Vector DB\*\*: Qdrant Cloud (free tier), not local Docker -- Docker
+* &#x20; Desktop wasn't running/configured on this machine and fixing that was
+* &#x20; deprioritized in favor of forward progress; revisit post-project if a
+* &#x20; local setup is ever needed for another reason.
 
 ## Measured Results (fill in as produced)
+
+\### Step 2 manual retrieval spot-check (3 queries, dense-only, BGE-M3)
+
+
+
+| Query | Top score | Result quality |
+
+|---|---|---|
+
+| Path parameter with type hint | 0.686 | Clean -- all top-3 from the exact right doc |
+
+| How dependency injection works | 0.741 | Clean -- all top-3 from the exact right doc |
+
+| async vs sync path operations | 0.646 | Weaker -- top hit relevant, #2/#3 tangential; likely because the corpus has no single dedicated "async vs sync" page, so the answer is genuinely scattered across docs |
+
+
+
+This is dense-only, pre-hybrid/pre-rerank -- a useful baseline for Step 3's
+
+hybrid comparison, especially query 3, where BM25 keyword matching on
+
+"async" and "sync" might do better than semantic similarity alone.
 
 ### Retrieval precision/recall
 
