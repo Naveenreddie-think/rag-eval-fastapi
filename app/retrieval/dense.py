@@ -32,6 +32,7 @@ def _get_client() -> QdrantClient:
         _client = QdrantClient(
             url=os.getenv("QDRANT_URL"),
             api_key=os.getenv("QDRANT_API_KEY"),
+	    timeout=60,
         )
     return _client
 
@@ -49,10 +50,9 @@ def create_collection(recreate: bool = False) -> None:
         )
 
 
-def upsert_chunks(chunks: list[dict]) -> None:
-    """Embed and index a list of chunk dicts (each with source_path,
-    header_path, text) into Qdrant. Chunk index in the list becomes its
-    point ID."""
+def upsert_chunks(chunks: list[dict], batch_size: int = 64) -> None:
+    """Embed and index chunks into Qdrant, uploading in batches so a
+    single large request doesn't time out against a free-tier cluster."""
     client = _get_client()
     texts = [c["text"] for c in chunks]
     vectors = embed(texts)
@@ -69,8 +69,11 @@ def upsert_chunks(chunks: list[dict]) -> None:
         )
         for i, (chunk, vector) in enumerate(zip(chunks, vectors))
     ]
-    client.upsert(collection_name=COLLECTION_NAME, points=points)
 
+    for start in range(0, len(points), batch_size):
+        batch = points[start:start + batch_size]
+        client.upsert(collection_name=COLLECTION_NAME, points=batch)
+        print(f"  Uploaded {min(start + batch_size, len(points))}/{len(points)} points")
 
 def dense_search(query: str, top_k: int = 5) -> list[dict]:
     """Embed the query and return the top_k nearest chunks by cosine
