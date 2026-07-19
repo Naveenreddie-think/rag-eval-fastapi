@@ -149,3 +149,179 @@
     }
   ]
 }
+{
+  "_note": "DRAFT batch 2 for review. Same process as batch 1: keep, edit, or reject each pair.",
+  "qa_pairs": [
+    {
+      "id": "sh_011",
+      "question": "What Pydantic class do you inherit from to declare a request body model in FastAPI?",
+      "answer": "`BaseModel`, imported from `pydantic`. You declare a class that inherits from it, with standard Python types for the attributes, then use that class as a type annotation on a path operation function parameter.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/body.md#import-pydantics-basemodel",
+        "tutorial/body.md#declare-it-as-a-parameter"
+      ]
+    },
+    {
+      "id": "sh_012",
+      "question": "Does FastAPI support arbitrarily deeply nested Pydantic models in a request body?",
+      "answer": "Yes -- with FastAPI you can define, validate, document, and use arbitrarily deeply nested models, thanks to Pydantic.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/body-nested-models.md#body-nested-models",
+        "tutorial/body-nested-models.md#deeply-nested-models"
+      ]
+    },
+    {
+      "id": "sh_013",
+      "question": "If you name a header parameter's Python variable with underscores, does FastAPI still match it correctly to the actual HTTP header, which conventionally uses hyphens?",
+      "answer": "Yes -- `Header` has extra functionality on top of `Path`/`Query`/`Cookie` specifically to handle this: since most standard HTTP headers use hyphens (which aren't valid in Python variable names), FastAPI automatically converts underscores in the parameter name for you.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/header-params.md#automatic-conversion"
+      ]
+    },
+    {
+      "id": "sh_014",
+      "question": "What two attributes does FastAPI's `UploadFile` object expose for an uploaded file?",
+      "answer": "`filename` (a `str` with the original uploaded file name, e.g. `myimage.jpg`) and `content_type` (a `str` with the MIME type, e.g. `image/jpeg`).",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/request-files.md#uploadfile"
+      ]
+    },
+    {
+      "id": "sh_015",
+      "question": "What library does the FastAPI SQL databases tutorial use as its example ORM/database toolkit?",
+      "answer": "SQLModel -- built to be compatible with both Pydantic and SQLAlchemy, so the same model classes can double as Pydantic models and database table models.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/sql-databases.md#sql-relational-databases"
+      ]
+    },
+    {
+      "id": "sh_016",
+      "question": "What class do you use to group related path operations into a separate module/file, apart from the main `FastAPI` app instance?",
+      "answer": "`APIRouter` -- you import it, create an instance the same way you would `FastAPI`, and declare path operations on it the same way as on the main app.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/bigger-applications.md#apirouter"
+      ]
+    },
+    {
+      "id": "sh_017",
+      "question": "In the Settings and Environment Variables tutorial, what does decorating the settings-reading function with `@lru_cache` actually accomplish?",
+      "answer": "It makes the function return the same `Settings` object every time it's called, instead of re-running the (comparatively slow) code to read the file/environment again on each call -- so the settings are computed once and reused.",
+      "category": "single_hop",
+      "source_chunks": [
+        "advanced/settings.md#lru-cache-technical-details"
+      ]
+    },
+    {
+      "id": "sh_018",
+      "question": "What Python standard-library function does the HTTP Basic Auth example use to compare the provided username/password against the correct ones, specifically to avoid timing attacks?",
+      "answer": "`secrets.compare_digest()` -- it takes the same amount of time to compare two strings regardless of how many characters match, unlike a naive `==` comparison, which prevents attackers from inferring correct characters one at a time by measuring response time.",
+      "category": "single_hop",
+      "source_chunks": [
+        "advanced/security/http-basic-auth.md#fix-it-with-secrets-compare-digest"
+      ]
+    },
+    {
+      "id": "sh_019",
+      "question": "What exception does FastAPI raise when a WebSocket connection is closed while you're awaiting `websocket.receive_text()`?",
+      "answer": "`WebSocketDisconnect`.",
+      "category": "single_hop",
+      "source_chunks": [
+        "advanced/websockets.md#handling-disconnections-and-multiple-clients"
+      ]
+    },
+    {
+      "id": "sh_020",
+      "question": "Which two FastAPI parameter types do you use together to receive both file uploads and form fields in the same request?",
+      "answer": "`File` and `Form`.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/request-forms-and-files.md#request-forms-and-files"
+      ]
+    },
+    {
+      "id": "mh_005",
+      "question": "In the SQL databases tutorial, why doesn't the `HeroPublic` model expose the `secret_name` field to API clients, and what general FastAPI mechanism does this rely on?",
+      "answer": "`HeroPublic` is deliberately defined with only the fields from `HeroBase` (name, age), not the extra `secret_name` field that only the actual table model `Hero` has -- so it's structurally impossible for it to include that field. This is used together with FastAPI's `response_model` mechanism (declared per path operation), which the general Response Model docs describe as being especially useful to ensure private data is filtered out of what's actually sent to the client.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/sql-databases.md#heropublic-the-public-data-model",
+        "tutorial/response-model.md#recap"
+      ]
+    },
+    {
+      "id": "mh_006",
+      "question": "Can you add dependencies that apply to the entire FastAPI application, and how does that relate to the router-level dependencies used when structuring a bigger application into multiple files?",
+      "answer": "Yes -- you can add dependencies to the whole `FastAPI` app, similar to how you can add them to individual path operation decorators. The Global Dependencies docs note this connects to how bigger applications are structured (per the Bigger Applications - Multiple Files guide): dependencies can also be declared at the `APIRouter` level so they apply to every path operation included through that router, in addition to (or instead of) truly global, app-wide dependencies.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/dependencies/global-dependencies.md#global-dependencies",
+        "tutorial/dependencies/global-dependencies.md#dependencies-for-groups-of-path-operations",
+        "tutorial/bigger-applications.md#apirouter"
+      ]
+    },
+    {
+      "id": "mh_007",
+      "question": "How would you provide a different settings object during tests, and what tool do you actually use to run HTTP requests against your FastAPI app during those tests?",
+      "answer": "By creating a dependency override for the settings-providing dependency (e.g. `get_settings`) -- FastAPI's dependency system lets you swap it out specifically for tests. Requests against the app during those tests are made using `TestClient`, which is built on HTTPX.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "advanced/settings.md#settings-and-testing",
+        "tutorial/testing.md#testing"
+      ]
+    },
+    {
+      "id": "mh_008",
+      "question": "Do FastAPI's `Depends`-based dependencies work inside WebSocket endpoints the same way they do in regular HTTP path operations?",
+      "answer": "Yes -- inside WebSocket endpoints you can import and use `Depends` (along with `Security`, `Cookie`, `Header`, `Path`, `Query`), and they work the same way as they do for other FastAPI endpoints/path operations.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "advanced/websockets.md#using-depends-and-others",
+        "tutorial/dependencies/index.md#dependencies"
+      ]
+    },
+    {
+      "id": "mh_009",
+      "question": "In the HTTP Basic Auth example, what status code and header does the `HTTPException` get raised with when credentials are incorrect, and does FastAPI's general error-handling system support adding custom headers to an `HTTPException` like that?",
+      "answer": "Status code 401 (the same code returned when no credentials are provided at all), with a `WWW-Authenticate` header added so the browser shows its native login prompt. Yes -- FastAPI's general error-handling docs confirm there are situations where it's useful to add custom headers to an HTTP error, and this is exactly one of them.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "advanced/security/http-basic-auth.md#return-the-error",
+        "tutorial/handling-errors.md#add-custom-headers"
+      ]
+    },
+    {
+      "id": "na_006",
+      "question": "How do I integrate FastAPI with Apache Kafka for event streaming?",
+      "answer": "Not covered in this corpus. Kafka is not mentioned anywhere in the tutorial or advanced sections.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_007",
+      "question": "What's the recommended way to implement feature flags or A/B testing in a FastAPI application?",
+      "answer": "Not covered in this corpus. Neither feature flags nor A/B testing are mentioned anywhere in the tutorial or advanced sections.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_008",
+      "question": "How do I set up mutual TLS (mTLS) client certificate authentication for a FastAPI application?",
+      "answer": "Not covered in this corpus. Mutual TLS and client certificate authentication are not mentioned anywhere in the tutorial or advanced sections -- the security docs cover OAuth2, HTTP Basic Auth, and API keys via headers/cookies/query params, not certificate-based auth.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_009",
+      "question": "How do I set up a multi-region, active-active deployment of a FastAPI application across AWS and GCP?",
+      "answer": "Not covered in this corpus. Multi-region or active-active deployment strategies are not mentioned anywhere in the tutorial or advanced sections. Worth noting: this corpus is scoped to only the tutorial/ and advanced/ doc subsets -- FastAPI's separate deployment/ documentation folder (which covers things like HTTPS, Docker, and cloud deployment more generally) was deliberately excluded from ingestion, so this gap partly reflects corpus scope, not necessarily a real gap in FastAPI's full documentation.",
+      "category": "no_answer",
+      "source_chunks": []
+    }
+  ]
+}
