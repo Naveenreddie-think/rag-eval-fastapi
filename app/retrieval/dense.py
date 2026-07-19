@@ -32,7 +32,8 @@ def _get_client() -> QdrantClient:
         _client = QdrantClient(
             url=os.getenv("QDRANT_URL"),
             api_key=os.getenv("QDRANT_API_KEY"),
-	    timeout=60,
+            https=True,
+            timeout=60,  # free-tier cluster can be slow on larger requests
         )
     return _client
 
@@ -52,7 +53,10 @@ def create_collection(recreate: bool = False) -> None:
 
 def upsert_chunks(chunks: list[dict], batch_size: int = 64) -> None:
     """Embed and index chunks into Qdrant, uploading in batches so a
-    single large request doesn't time out against a free-tier cluster."""
+    single large request doesn't time out against a free-tier cluster.
+    Chunk index in the list becomes its point ID -- this must match the
+    index BM25 uses over the same chunk list (see bm25.py) so hybrid
+    fusion can match results by id across both retrievers."""
     client = _get_client()
     texts = [c["text"] for c in chunks]
     vectors = embed(texts)
@@ -75,9 +79,11 @@ def upsert_chunks(chunks: list[dict], batch_size: int = 64) -> None:
         client.upsert(collection_name=COLLECTION_NAME, points=batch)
         print(f"  Uploaded {min(start + batch_size, len(points))}/{len(points)} points")
 
+
 def dense_search(query: str, top_k: int = 5) -> list[dict]:
     """Embed the query and return the top_k nearest chunks by cosine
-    similarity. Returns list of {"score", "source_path", "header_path", "text"}."""
+    similarity. Returns list of
+    {"id", "score", "source_path", "header_path", "text"}."""
     client = _get_client()
     query_vector = embed_query(query)
     results = client.query_points(
@@ -88,6 +94,7 @@ def dense_search(query: str, top_k: int = 5) -> list[dict]:
 
     return [
         {
+            "id": r.id,
             "score": r.score,
             "source_path": r.payload["source_path"],
             "header_path": r.payload["header_path"],
