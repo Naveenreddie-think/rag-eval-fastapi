@@ -1,12 +1,151 @@
 {
-  "_schema_note": "Placeholder. Step 4 fills this with 75-100 hand-written pairs. Each entry follows the shape below. Delete this note key before running anything against the file.",
+  "_note": "DRAFT batch for review. Each pair is grounded in real chunk text pulled directly from data/processed/chunks.json. Review each: keep as-is, edit, or reject. Once approved, merge into eval/qa_pairs.json (replacing the placeholder schema example there).",
   "qa_pairs": [
     {
-      "id": "example_0001",
-      "question": "Example: How do you declare a path parameter with a type hint in FastAPI?",
-      "answer": "Example placeholder answer -- to be replaced with a real, source-verified answer.",
+      "id": "sh_001",
+      "question": "How do you declare that a path parameter should be an integer in FastAPI?",
+      "answer": "By adding a standard Python type annotation to the function parameter, e.g. `item_id: int` in the path operation function -- FastAPI uses this annotation to parse and validate the value.",
       "category": "single_hop",
-      "source_chunks": ["path/to/doc.md#section-header"]
+      "source_chunks": ["tutorial/path-params.md#path-parameters-with-types"]
+    },
+    {
+      "id": "sh_002",
+      "question": "How do you declare a path parameter that should be allowed to contain a full file path, like `home/johndoe/myfile.txt`?",
+      "answer": "Use the `:path` convertor from Starlette, e.g. a route like `/files/{file_path:path}` -- the `:path` part tells FastAPI the parameter can contain slashes as a full path, not just a single path segment.",
+      "category": "single_hop",
+      "source_chunks": ["tutorial/path-params.md#path-convertor"]
+    },
+    {
+      "id": "sh_003",
+      "question": "How do you set a maximum length of 50 characters on an optional query parameter `q`?",
+      "answer": "Wrap the type in `Annotated` and add `Query(max_length=50)`, e.g. `q: Annotated[str | None, Query(max_length=50)] = None`.",
+      "category": "single_hop",
+      "source_chunks": ["tutorial/query-params-str-validations.md#add-query-to-annotated-in-the-q-parameter"]
+    },
+    {
+      "id": "sh_004",
+      "question": "How do you declare a cookie parameter in a FastAPI path operation function?",
+      "answer": "Import `Cookie` from fastapi and declare the parameter the same way as `Query` or `Path`, e.g. `ads_id: Annotated[str | None, Cookie()] = None`.",
+      "category": "single_hop",
+      "source_chunks": ["tutorial/cookie-params.md#import-cookie"]
+    },
+    {
+      "id": "sh_005",
+      "question": "What method do you call on a `BackgroundTasks` object to schedule a task to run after the response is returned?",
+      "answer": "`.add_task()` -- you pass it your task function (and any parameters that function needs) inside the path operation function.",
+      "category": "single_hop",
+      "source_chunks": ["tutorial/background-tasks.md#add-the-background-task"]
+    },
+    {
+      "id": "sh_006",
+      "question": "What class do you use to enable CORS in a FastAPI application?",
+      "answer": "`CORSMiddleware` -- you import it, define a list of allowed origins, and add it as middleware to the FastAPI application.",
+      "category": "single_hop",
+      "source_chunks": ["tutorial/cors.md#use-corsmiddleware"]
+    },
+    {
+      "id": "sh_007",
+      "question": "In FastAPI, do you raise or return an `HTTPException` to report an error to the client?",
+      "answer": "You `raise` it, not `return` it -- `HTTPException` is a normal Python exception with additional data relevant to APIs, so it follows Python's normal exception-raising behavior.",
+      "category": "single_hop",
+      "source_chunks": ["tutorial/handling-errors.md#raise-an-httpexception-in-your-code"]
+    },
+    {
+      "id": "sh_008",
+      "question": "What class do you use to serve a directory of static files automatically in FastAPI?",
+      "answer": "`StaticFiles`, imported from `fastapi.staticfiles` and mounted at a specific path, e.g. `app.mount(\"/static\", StaticFiles(directory=\"static\"), name=\"static\")`.",
+      "category": "single_hop",
+      "source_chunks": ["tutorial/static-files.md#use-staticfiles"]
+    },
+    {
+      "id": "sh_009",
+      "question": "What underlying library is FastAPI's `TestClient` built on?",
+      "answer": "HTTPX -- which itself is designed based on the Requests library, making it familiar to use.",
+      "category": "single_hop",
+      "source_chunks": ["tutorial/testing.md#testing"]
+    },
+    {
+      "id": "sh_010",
+      "question": "What function does FastAPI provide to convert a Pydantic model (or other Python data type) into something JSON-compatible, such as before storing it in a database?",
+      "answer": "`jsonable_encoder`.",
+      "category": "single_hop",
+      "source_chunks": ["tutorial/encoder.md#using-the-jsonable_encoder"]
+    },
+    {
+      "id": "mh_001",
+      "question": "In the OAuth2-with-JWT tutorial, what happens when `get_current_user` receives an invalid token, and what general FastAPI mechanism is that behavior actually built on?",
+      "answer": "The security tutorial states that if the JWT token is invalid, the dependency returns an HTTP error right away. That mechanism is FastAPI's general error-handling approach described in the Handling Errors guide: you raise an `HTTPException` (a normal Python exception with HTTP-relevant data) rather than returning it, and FastAPI converts that into the appropriate HTTP error response.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/security/oauth2-jwt.md#update-the-dependencies",
+        "tutorial/handling-errors.md#use-httpexception"
+      ]
+    },
+    {
+      "id": "mh_002",
+      "question": "Do FastAPI's lifespan startup/shutdown events run for sub-applications mounted with `app.mount()`, and what is the currently recommended way to define startup/shutdown logic in the first place?",
+      "answer": "No -- lifespan events (startup and shutdown) only execute for the main application, not for sub-applications mounted separately. The recommended way to define this logic is the `lifespan` parameter of the `FastAPI` app, using an async context manager (a function decorated with `@asynccontextmanager` that uses `yield`) -- the older `@app.on_event(\"startup\")` / `@app.on_event(\"shutdown\")` decorators are deprecated in favor of this.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "advanced/events.md#sub-applications",
+        "advanced/events.md#lifespan",
+        "advanced/events.md#alternative-events-deprecated"
+      ]
+    },
+    {
+      "id": "mh_003",
+      "question": "If you put `Query()` inside `Annotated` for a query parameter, can you still set that parameter's default value using `Query(default=...)`, and why is using `Annotated` recommended over the older style regardless?",
+      "answer": "No -- when `Query` is used inside `Annotated`, you cannot use `Query`'s own `default` parameter; instead you set the actual default value of the function parameter itself (e.g. `= None`), otherwise it would be inconsistent with how Python parameter defaults normally work. `Annotated` is still recommended over the older style (putting `Query(...)` directly as the parameter's default value) because the function parameter's default stays the actual, intuitive default -- among other tooling/editor-support benefits described in the docs.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/query-params-str-validations.md#query-as-the-default-value-or-in-annotated",
+        "tutorial/query-params-str-validations.md#advantages-of-annotated"
+      ]
+    },
+    {
+      "id": "mh_004",
+      "question": "Does FastAPI support arbitrarily deep chains of sub-dependencies, and if a chain of dependencies all use `yield`, does FastAPI guarantee their cleanup ('exit') code runs in a defined order?",
+      "answer": "Yes to both. FastAPI's dependency injection system allows dependencies to have sub-dependencies that can be as deep as needed -- described as allowing arbitrarily deeply nested dependency 'graphs' (trees). Separately, when dependencies with `yield` are chained as sub-dependencies, FastAPI makes sure the exit/cleanup code in each one runs in the correct order.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/dependencies/sub-dependencies.md#recap",
+        "tutorial/dependencies/dependencies-with-yield.md#sub-dependencies-with-yield"
+      ]
+    },
+    {
+      "id": "na_001",
+      "question": "How do I connect a FastAPI application to a MongoDB database using the Motor driver?",
+      "answer": "Not covered in this corpus. MongoDB's `MotorClient` is mentioned exactly once, only in passing, as an example trigger for a `RuntimeError: Task attached to a different loop` issue in the async-testing troubleshooting notes -- there is no actual MongoDB/Motor integration guide in the tutorial or advanced sections.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_002",
+      "question": "How do I build a GraphQL API with FastAPI?",
+      "answer": "Not covered in this corpus. GraphQL is mentioned exactly once, only as a passing example (that GraphQL APIs typically use only POST operations) inside the First Steps tutorial's discussion of path operation decorators -- there is no guide for actually building a GraphQL API with FastAPI.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_003",
+      "question": "How do I configure Celery with Redis as the message broker for background task processing in FastAPI?",
+      "answer": "Not covered in this corpus. Celery and Redis are each mentioned only in passing, as examples of 'bigger tools' one might reach for instead of FastAPI's built-in `BackgroundTasks` when tasks need to run across multiple processes/servers -- no actual configuration or integration steps are given.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_004",
+      "question": "How do I containerize a FastAPI application with Docker?",
+      "answer": "Not covered in this corpus. Docker is not mentioned anywhere in the tutorial or advanced sections of this corpus.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_005",
+      "question": "How do I implement rate limiting on a FastAPI endpoint?",
+      "answer": "Not covered in this corpus. Rate limiting is not mentioned anywhere in the tutorial or advanced sections of this corpus.",
+      "category": "no_answer",
+      "source_chunks": []
     }
   ]
 }
