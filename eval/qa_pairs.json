@@ -505,3 +505,237 @@
     }
   ]
 }
+{
+  "_note": "DRAFT batch 4 (final) for review. Same process: keep, edit, or reject each pair.",
+  "qa_pairs": [
+    {
+      "id": "sh_031",
+      "question": "What Python standard-library type would you use to declare a path operation parameter that should accept a UUID value?",
+      "answer": "`UUID`, from the `uuid` module -- FastAPI recognizes it as a data type and represents it as a string in requests/responses, while giving you an actual Python `UUID` object inside your function.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/extra-data-types.md#other-data-types"
+      ]
+    },
+    {
+      "id": "sh_032",
+      "question": "By default, does FastAPI include additional status codes (returned by directly returning a `Response`/`JSONResponse` with a custom status code) in the generated OpenAPI schema?",
+      "answer": "No -- if you return additional status codes and responses directly, they won't be included in the OpenAPI schema, because FastAPI doesn't have a way to know beforehand what you're going to return. You can document this behavior manually if you want, using the appropriate OpenAPI tools.",
+      "category": "single_hop",
+      "source_chunks": [
+        "advanced/additional-status-codes.md#openapi-and-api-docs"
+      ]
+    },
+    {
+      "id": "sh_033",
+      "question": "In FastAPI's OAuth2 password-flow example, what does the `OAuth2PasswordRequestForm` dependency give you access to that's different from a raw `scope` string sent by the client?",
+      "answer": "Even though the client sends a single `scope` form field containing a space-separated string of scopes, the `OAuth2PasswordRequestForm` instance exposes it as a `scopes` attribute -- already split into an actual `list` of the individual scope strings.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/security/simple-oauth2.md#use-the-form-data"
+      ]
+    },
+    {
+      "id": "sh_034",
+      "question": "If you add a dependency to a path operation decorator's `dependencies` list (rather than as a function parameter), and that dependency function returns a value, is that return value made available inside the path operation function?",
+      "answer": "No -- dependencies declared this way can return values or not, but the values won't be used by the path operation function. You could still reuse a normal dependency that returns something you use elsewhere, and it will still execute (and can still raise exceptions), but its return value is simply discarded in this context.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/dependencies/dependencies-in-path-operation-decorators.md#return-values"
+      ]
+    },
+    {
+      "id": "sh_035",
+      "question": "What attribute do you use on a FastAPI app instance to define OpenAPI webhooks, analogous to how you'd define a normal path operation?",
+      "answer": "The `webhooks` attribute, e.g. `@app.webhooks.post(...)` -- used the same way you'd define a regular path operation, but to document requests your app will send to external users' apps, rather than requests your app receives.",
+      "category": "single_hop",
+      "source_chunks": [
+        "advanced/openapi-webhooks.md#an-app-with-webhooks"
+      ]
+    },
+    {
+      "id": "sh_036",
+      "question": "In the OpenAPI Callbacks docs, what class do you use to build a set of callback path operations that document how an external API should look, before attaching them to the main path operation?",
+      "answer": "`APIRouter` -- you create a separate `APIRouter` instance specifically to hold the callback path operation(s), then pass it to the main path operation decorator's `callbacks` parameter.",
+      "category": "single_hop",
+      "source_chunks": [
+        "advanced/openapi-callbacks.md#create-a-callback-apirouter"
+      ]
+    },
+    {
+      "id": "sh_037",
+      "question": "In the Get Current User tutorial, what Pydantic model type does the `get_current_user` dependency ultimately return?",
+      "answer": "A Pydantic `User` model -- the dependency uses a (fake, for tutorial purposes) utility function that takes the token string and returns the corresponding `User` model instance.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/security/get-current-user.md#get-the-user"
+      ]
+    },
+    {
+      "id": "sh_038",
+      "question": "Where in a Pydantic model can you add `examples` so they show up in the generated JSON Schema, according to the Declare Request Example Data docs?",
+      "answer": "Two ways: passing `examples` inside `model_config`/`schema_extra` at the model level, or using `Field(examples=[...])` on an individual field.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/schema-extra-example.md#extra-json-schema-data-in-pydantic-models",
+        "tutorial/schema-extra-example.md#field-additional-arguments"
+      ]
+    },
+    {
+      "id": "sh_039",
+      "question": "Why does the Simple OAuth2 tutorial recommend hashing passwords before storing them in a database, rather than storing them as plaintext?",
+      "answer": "If the database is ever stolen, the thief would only have the hashes, not the actual plaintext passwords -- so they wouldn't be able to reuse those same passwords against other systems the user might have reused them on.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/security/simple-oauth2.md#why-use-password-hashing"
+      ]
+    },
+    {
+      "id": "sh_040",
+      "question": "In the Simple OAuth2 tutorial's login flow, what response is returned to the client if they authenticate with an inactive user?",
+      "answer": "An error with the detail message `\"Inactive user\"`, produced by the additional `get_current_active_user` dependency, which checks whether the user returned by `get_current_user` is active before allowing the request through.",
+      "category": "single_hop",
+      "source_chunks": [
+        "tutorial/security/simple-oauth2.md#inactive-user",
+        "tutorial/security/simple-oauth2.md#update-the-dependencies"
+      ]
+    },
+    {
+      "id": "mh_016",
+      "question": "The 'Dependencies in path operation decorators' docs mention that dependencies with no return value are still useful because they can require things like headers or raise exceptions. How does this relate to the `verify_token`-style pattern, and does this same 'attach a dependency without using its return value' idea extend to whole applications, not just single path operations?",
+      "answer": "Yes -- the pattern of a dependency like `verify_token` that just validates a header and raises an `HTTPException` if it's missing/invalid (without needing to return anything used by the path operation) is exactly what the `dependencies` parameter on a path operation decorator is for. The same docs note this same idea extends further: dependencies can also be declared for a whole group of path operations (via `APIRouter`), and -- per Global Dependencies -- even for the entire `FastAPI` application, so every request goes through the same check.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/dependencies/dependencies-in-path-operation-decorators.md#raise-exceptions",
+        "tutorial/dependencies/dependencies-in-path-operation-decorators.md#dependencies-for-a-group-of-path-operations",
+        "tutorial/dependencies/dependencies-in-path-operation-decorators.md#global-dependencies"
+      ]
+    },
+    {
+      "id": "mh_017",
+      "question": "The Get Current User tutorial builds `get_current_user` as a dependency with a sub-dependency on `oauth2_scheme`. The Simple OAuth2 tutorial then adds `get_current_active_user` on top. Combining these: what's the actual dependency chain by the end of the Simple OAuth2 tutorial, from the path operation down to the raw token?",
+      "answer": "The path operation depends on `get_current_active_user`, which depends on `get_current_user` (as described in Get Current User), which in turn depends on `oauth2_scheme` to extract the raw bearer token from the request. So the chain is: path operation -> `get_current_active_user` -> `get_current_user` -> `oauth2_scheme`, with the active-user check added on top of the base user-fetching dependency from the prior chapter.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/security/get-current-user.md#create-a-get_current_user-dependency",
+        "tutorial/security/simple-oauth2.md#update-the-dependencies"
+      ]
+    },
+    {
+      "id": "mh_018",
+      "question": "If you want to both return an additional (non-default) HTTP status code from a path operation AND have that additional response documented in the OpenAPI schema, is simply returning a `Response`/`JSONResponse` with that status code (as covered in Additional Status Codes) enough on its own?",
+      "answer": "No, not fully -- per the Additional Status Codes docs, returning additional status codes/responses directly means they won't automatically appear in the OpenAPI schema, since FastAPI can't know in advance what you'll return that way. To get it documented, you have to explicitly add that information using FastAPI/Starlette's OpenAPI documentation tools -- it isn't inferred automatically the way a normal `response_model`-based response is.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "advanced/additional-status-codes.md#additional-status-codes_1",
+        "advanced/additional-status-codes.md#openapi-and-api-docs"
+      ]
+    },
+    {
+      "id": "mh_019",
+      "question": "Both 'Declare Request Example Data' and 'OpenAPI Callbacks' involve documenting things FastAPI can't fully infer automatically from your normal code. What's the common underlying reason both features exist, and how does each one solve it differently?",
+      "answer": "Both exist because FastAPI's automatic docs, by default, only reflect what it can infer directly from your declared types/models -- it doesn't know about illustrative sample values, or about external requests your API might trigger. 'Declare Request Example Data' solves this for sample values, letting you attach `examples` to models/parameters so the docs UI shows realistic example payloads. 'OpenAPI Callbacks' solves this for a different problem entirely -- documenting a request *your app will send* to an external API -- by letting you write dummy path operations (via a separate `APIRouter`) purely to describe what that external API's endpoint should look like, attached via the `callbacks` parameter.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/schema-extra-example.md#declare-request-example-data",
+        "advanced/openapi-callbacks.md#openapi-callbacks"
+      ]
+    },
+    {
+      "id": "mh_020",
+      "question": "OpenAPI Webhooks and OpenAPI Callbacks both involve FastAPI documenting requests your app sends to someone else's API rather than requests it receives. What's the key structural difference in how each one is declared in code?",
+      "answer": "Webhooks are declared directly on the main `FastAPI` app instance itself, using its `webhooks` attribute (e.g. `@app.webhooks.post(...)`), the same way you'd declare a normal path operation. Callbacks, by contrast, are declared on a separate `APIRouter` created specifically to hold the callback path operation(s), which is then attached to a specific path operation via that path operation decorator's `callbacks` parameter -- tying the documentation to one particular endpoint rather than the whole app.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "advanced/openapi-webhooks.md#an-app-with-webhooks",
+        "advanced/openapi-callbacks.md#create-a-callback-apirouter",
+        "advanced/openapi-callbacks.md#add-the-callback-router"
+      ]
+    },
+    {
+      "id": "na_012",
+      "question": "How do I use FastAPI's built-in support to connect to a MongoDB database with an ODM like Beanie or ODMantic?",
+      "answer": "Not covered in this corpus. Neither Beanie nor ODMantic are mentioned anywhere in the tutorial or advanced sections -- MongoDB itself is mentioned exactly once, only as a troubleshooting aside, not as part of an actual integration guide.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_013",
+      "question": "How do I configure FastAPI to use gRPC instead of HTTP for a service?",
+      "answer": "Not covered in this corpus. gRPC is not mentioned anywhere in the tutorial or advanced sections.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_014",
+      "question": "How do I set up horizontal pod autoscaling for a FastAPI app running in Kubernetes?",
+      "answer": "Not covered in this corpus. Kubernetes, pod autoscaling, and related orchestration concepts are not mentioned anywhere in the tutorial or advanced sections -- and as noted for a similar earlier question, FastAPI's separate deployment/ documentation folder (which might cover infrastructure topics like this) was excluded from this corpus's scope entirely.",
+      "category": "no_answer",
+      "source_chunks": []
+    },
+    {
+      "id": "na_015",
+      "question": "How do I implement idempotency keys for POST requests in FastAPI to prevent duplicate order creation on client retries?",
+      "answer": "Not covered in this corpus. Idempotency keys are not mentioned anywhere in the tutorial or advanced sections.",
+      "category": "no_answer",
+      "source_chunks": []
+    }
+  ]
+}
+{
+  "_note": "DRAFT batch 5 (final, 5 pairs) for review.",
+  "qa_pairs": [
+    {
+      "id": "mh_021",
+      "question": "The Classes as Dependencies tutorial shows using a class like `CommonQueryParams` directly as a dependency, taking advantage of the fact that instantiating a class uses the same call syntax as calling a function. Separately, Query Parameter Models covers grouping related query parameters into a Pydantic model. Are these describing the same underlying pattern, or two genuinely different approaches to reducing repeated query-parameter declarations?",
+      "answer": "They're two different approaches. Classes as Dependencies works because *any* callable (not just functions) can be a dependency -- a class is 'callable' in the sense that instantiating it (`ClassName(...)`) works like calling a function, so `Depends(CommonQueryParams)` runs `CommonQueryParams.__init__` per-request. Query Parameter Models instead relies specifically on Pydantic model declaration and validation (using `Annotated[Model, Query()]`) to group and validate a set of query parameters together, including features like forbidding extra query parameters -- it isn't about exploiting Python's general callable/class-instantiation syntax the way Classes as Dependencies is.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/dependencies/classes-as-dependencies.md#classes-as-dependencies_1",
+        "tutorial/query-param-models.md#query-parameters-with-a-pydantic-model"
+      ]
+    },
+    {
+      "id": "mh_022",
+      "question": "Both Header Parameter Models and the plain Header Parameters tutorial mention that FastAPI automatically converts underscores to hyphens. Does the Pydantic-model version of header parameters let you disable that automatic conversion, and if so, does the plain (non-model) version offer the same option?",
+      "answer": "Header Parameter Models specifically covers a 'Disable Convert Underscores' option using Pydantic model configuration, letting you turn off the automatic underscore-to-hyphen conversion for that model. The plain Header Parameters tutorial only describes the automatic conversion behavior itself (via the 'Automatic conversion' section) without describing a way to disable it -- so the ability to explicitly turn the behavior off is specific to the Pydantic-model-based approach covered in Header Parameter Models, not something shown for individually-declared header parameters.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "tutorial/header-param-models.md#disable-convert-underscores",
+        "tutorial/header-params.md#automatic-conversion"
+      ]
+    },
+    {
+      "id": "mh_023",
+      "question": "If your FastAPI app is deployed behind a proxy that strips a path prefix (using `root_path`), and you're also mounting a sub-application, does the Behind a Proxy documentation say `root_path` handling works normally, or does mounting a sub-application change anything about it?",
+      "answer": "It works normally -- the 'Mounting a sub-application' section of Behind a Proxy states that if you need to mount a sub-application while also using a proxy with `root_path` (as described in the general Sub Applications - Mounts docs), you can do it normally, as you would otherwise expect, without special extra handling for the proxy/root_path combination.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "advanced/behind-a-proxy.md#mounting-a-sub-application",
+        "advanced/events.md#sub-applications"
+      ]
+    },
+    {
+      "id": "mh_024",
+      "question": "The Generating SDKs docs mention that FastAPI uses a unique operation ID for each path operation, partly used to name generated client methods, and that this can be customized. Separately, Path Operation Configuration covers `tags` and other decorator-level metadata. Does customizing operation IDs for cleaner client method names involve the `tags` mechanism at all, or is it a separate configuration path?",
+      "answer": "It's related but not the same mechanism. Generating SDKs shows that cleaner client method names come from customizing how the operation's unique ID is generated (via a custom `generate_unique_id_function`), which is a separate configuration path from `tags`. However, the docs also show that when a FastAPI app *does* use tags (as covered generally in Path Operation Configuration), the SDK generator will normally separate the generated client code by tag -- so tags affect how the generated client is organized/grouped, while the custom ID function affects the actual method names within that structure. They're complementary, not the same setting.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "advanced/generate-clients.md#custom-generate-unique-id-function",
+        "advanced/generate-clients.md#generate-a-typescript-client-with-tags",
+        "tutorial/path-operation-configuration.md#tags"
+      ]
+    },
+    {
+      "id": "mh_025",
+      "question": "Testing Dependencies with Overrides describes using `app.dependency_overrides` to swap out a dependency during tests, using an example of an external authentication provider. Testing WebSockets shows using `TestClient` in a `with` statement to test a WebSocket connection. If a WebSocket endpoint uses `Depends` for authentication (as covered in the WebSockets docs), would `app.dependency_overrides` still apply when testing it with `TestClient`?",
+      "answer": "Yes, in principle -- `app.dependency_overrides` is a general mechanism on the `FastAPI` app itself (a plain `dict` mapping the original dependency to a replacement), not something scoped only to HTTP path operations. Since WebSocket endpoints support `Depends` the same way regular path operations do, and `TestClient` (used the same way for both HTTP and WebSocket testing, per Testing WebSockets) is what actually exercises the app, a dependency override registered on the app would apply regardless of whether the endpoint being tested is an HTTP path operation or a WebSocket endpoint.",
+      "category": "multi_hop",
+      "source_chunks": [
+        "advanced/testing-dependencies.md#use-the-app-dependency-overrides-attribute",
+        "advanced/testing-websockets.md#testing-websockets",
+        "advanced/websockets.md#using-depends-and-others"
+      ]
+    }
+  ]
+}
