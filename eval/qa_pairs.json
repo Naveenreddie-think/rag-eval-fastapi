@@ -87,7 +87,7 @@
       "answer": "`jsonable_encoder`.",
       "category": "single_hop",
       "source_chunks": [
-        "tutorial/encoder.md#using-the-jsonable_encoder"
+        "tutorial/encoder.md#using-the-jsonable-encoder"
       ]
     },
     {
@@ -455,7 +455,7 @@
       "source_chunks": [
         "advanced/response-directly.md#return-a-response",
         "advanced/response-directly.md#using-the-jsonable-encoder-in-a-response",
-        "tutorial/encoder.md#using-the-jsonable_encoder"
+        "tutorial/encoder.md#using-the-jsonable-encoder"
       ]
     },
     {
@@ -502,12 +502,7 @@
       "answer": "Not covered in this corpus. OpenTelemetry and distributed tracing are not mentioned anywhere in the tutorial or advanced sections.",
       "category": "no_answer",
       "source_chunks": []
-    }
-  ]
-}
-{
-  "_note": "DRAFT batch 4 (final) for review. Same process: keep, edit, or reject each pair.",
-  "qa_pairs": [
+    },
     {
       "id": "sh_031",
       "question": "What Python standard-library type would you use to declare a path operation parameter that should accept a UUID value?",
@@ -617,7 +612,7 @@
       "answer": "The path operation depends on `get_current_active_user`, which depends on `get_current_user` (as described in Get Current User), which in turn depends on `oauth2_scheme` to extract the raw bearer token from the request. So the chain is: path operation -> `get_current_active_user` -> `get_current_user` -> `oauth2_scheme`, with the active-user check added on top of the base user-fetching dependency from the prior chapter.",
       "category": "multi_hop",
       "source_chunks": [
-        "tutorial/security/get-current-user.md#create-a-get_current_user-dependency",
+        "tutorial/security/get-current-user.md#create-a-get-current-user-dependency",
         "tutorial/security/simple-oauth2.md#update-the-dependencies"
       ]
     },
@@ -679,12 +674,7 @@
       "answer": "Not covered in this corpus. Idempotency keys are not mentioned anywhere in the tutorial or advanced sections.",
       "category": "no_answer",
       "source_chunks": []
-    }
-  ]
-}
-{
-  "_note": "DRAFT batch 5 (final, 5 pairs) for review.",
-  "qa_pairs": [
+    },
     {
       "id": "mh_021",
       "question": "The Classes as Dependencies tutorial shows using a class like `CommonQueryParams` directly as a dependency, taking advantage of the fact that instantiating a class uses the same call syntax as calling a function. Separately, Query Parameter Models covers grouping related query parameters into a Pydantic model. Are these describing the same underlying pattern, or two genuinely different approaches to reducing repeated query-parameter declarations?",

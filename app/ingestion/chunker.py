@@ -6,6 +6,17 @@ headers. NOT justified yet -- chunk size/strategy gets swept for real in
 Step 5 against the eval set, not decided here. chunk_fixed_size() exists
 purely to produce the "naive baseline" for that later comparison.
 
+Each chunk keeps its full header path as metadata (e.g.
+"Metadata and Docs URLs > Metadata for API"), AND the real anchor slug
+of its deepest header (e.g. "metadata-for-api"), captured directly from
+source rather than derived by slugifying header text. This matters:
+verified that some headers contain embedded HTML/markdown formatting
+(e.g. '## Data <dfn title="...">conversion</dfn> { #data-conversion }')
+where a naive slugify of the visible header text would NOT reliably
+reproduce the real anchor -- so Step 4's QA pairs (which reference
+chunks as "file.md#anchor-slug") can only be matched exactly by
+capturing the real anchor, not guessing it.
+
 Fence-tracking detail: chunk_by_headers() tracks whether it's inside a
 fenced code block (``` ... ```) and never treats a line as a header while
 inside one. Without this, a Python comment inside a code sample --
@@ -18,20 +29,29 @@ import re
 HEADER_PATTERN = re.compile(r"^(#{1,6})\s+(.*)$")
 FENCE_PATTERN = re.compile(r"^```")
 # FastAPI's custom heading-anchor syntax, e.g. "# First Steps { #first-steps }"
-ANCHOR_PATTERN = re.compile(r"\{\s*#[\w-]+\s*\}")
+ANCHOR_PATTERN = re.compile(r"\{\s*#([\w-]+)\s*\}")
 
 
-def _clean_header_text(text: str) -> str:
-    return ANCHOR_PATTERN.sub("", text).strip()
+def _split_header_text_and_anchor(raw_header: str) -> tuple[str, str | None]:
+    """Split '## Data <dfn ...>conversion</dfn> { #data-conversion }' into
+    ('Data <dfn ...>conversion</dfn>', 'data-conversion'). Returns
+    (cleaned_text, anchor_or_None) -- anchor is None if the header has no
+    explicit { #anchor } marker (some don't)."""
+    match = ANCHOR_PATTERN.search(raw_header)
+    anchor = match.group(1) if match else None
+    text = ANCHOR_PATTERN.sub("", raw_header).strip()
+    return text, anchor
 
 
-def _flush(buf: list[str], header_stack: list[tuple[int, str]],
+def _flush(buf: list[str], header_stack: list[tuple[int, str, "str | None"]],
            source_path: str, chunks: list[dict]) -> None:
     content = "\n".join(buf).strip()
     if content:
+        deepest_anchor = header_stack[-1][2] if header_stack else None
         chunks.append({
             "source_path": source_path,
             "header_path": " > ".join(h[1] for h in header_stack),
+            "anchor": deepest_anchor,
             "text": content,
         })
 
@@ -39,11 +59,12 @@ def _flush(buf: list[str], header_stack: list[tuple[int, str]],
 def chunk_by_headers(doc_text: str, source_path: str) -> list[dict]:
     """Structure-aware chunking: split on markdown headers (# - ######),
     skipping any line that looks like a header while inside a fenced code
-    block. Returns a list of {"source_path", "header_path", "text"} dicts.
+    block. Returns a list of
+    {"source_path", "header_path", "anchor", "text"} dicts.
     """
     lines = doc_text.splitlines()
     chunks: list[dict] = []
-    header_stack: list[tuple[int, str]] = []
+    header_stack: list[tuple[int, str, "str | None"]] = []
     current_lines: list[str] = []
     in_fence = False
 
@@ -57,10 +78,10 @@ def chunk_by_headers(doc_text: str, source_path: str) -> list[dict]:
         if header_match:
             _flush(current_lines, header_stack, source_path, chunks)
             level = len(header_match.group(1))
-            text = _clean_header_text(header_match.group(2))
+            text, anchor = _split_header_text_and_anchor(header_match.group(2))
             while header_stack and header_stack[-1][0] >= level:
                 header_stack.pop()
-            header_stack.append((level, text))
+            header_stack.append((level, text, anchor))
             current_lines = [line]
         else:
             current_lines.append(line)
@@ -85,6 +106,7 @@ def chunk_fixed_size(doc_text: str, source_path: str,
         chunks.append({
             "source_path": source_path,
             "header_path": "",
+            "anchor": None,
             "text": " ".join(chunk_words),
         })
         if start + size >= len(words):
