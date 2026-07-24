@@ -1,0 +1,2742 @@
+{
+  "dense_only": {
+    "top_k": 5,
+    "per_query": [
+      {
+        "id": "sh_001",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_002",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_003",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_004",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_005",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_006",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_007",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "sh_008",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_009",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_010",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "mh_001",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_002",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.6,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_003",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_004",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_011",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_012",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_013",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_014",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_015",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_016",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_017",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_018",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_019",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_020",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_005",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_006",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "mh_007",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_008",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_009",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_021",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_022",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_023",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_024",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_025",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "sh_026",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_027",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_028",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_029",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_030",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_010",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_011",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_012",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "mh_013",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_014",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_015",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_031",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_032",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_033",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_034",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_035",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_036",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_037",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_038",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_039",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_040",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_016",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_017",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_018",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_019",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_020",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "mh_021",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_022",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_023",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_024",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_025",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.2
+      }
+    ],
+    "by_category": {
+      "single_hop": {
+        "n": 40,
+        "hit_rate": 0.775,
+        "recall": 0.7625,
+        "precision": 0.165,
+        "mrr": 0.5662499999999999
+      },
+      "multi_hop": {
+        "n": 25,
+        "hit_rate": 0.92,
+        "recall": 0.58,
+        "precision": 0.256,
+        "mrr": 0.6126666666666667
+      }
+    },
+    "overall": {
+      "n": 65,
+      "hit_rate": 0.8307692307692308,
+      "recall": 0.6923076923076923,
+      "precision": 0.2,
+      "mrr": 0.5841025641025641
+    }
+  },
+  "hybrid_alpha_1.0": {
+    "top_k": 5,
+    "per_query": [
+      {
+        "id": "sh_001",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_002",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_003",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_004",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_005",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "sh_006",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_007",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_008",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_009",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_010",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_001",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_002",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.6,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_003",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_004",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_011",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_012",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_013",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_014",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_015",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_016",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_017",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_018",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_019",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_020",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_005",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_006",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_007",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_008",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_009",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_021",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_022",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_023",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_024",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_025",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_026",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_027",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_028",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_029",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_030",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_010",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_011",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_012",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_013",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_014",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_015",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.6666666666666666,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_031",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_032",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_033",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_034",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_035",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_036",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "sh_037",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_038",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_039",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_040",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_016",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_017",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_018",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_019",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_020",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_021",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_022",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_023",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "mh_024",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "mh_025",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.5
+      }
+    ],
+    "by_category": {
+      "single_hop": {
+        "n": 40,
+        "hit_rate": 0.7,
+        "recall": 0.6875,
+        "precision": 0.14500000000000002,
+        "mrr": 0.5445833333333334
+      },
+      "multi_hop": {
+        "n": 25,
+        "hit_rate": 0.88,
+        "recall": 0.54,
+        "precision": 0.24,
+        "mrr": 0.75
+      }
+    },
+    "overall": {
+      "n": 65,
+      "hit_rate": 0.7692307692307693,
+      "recall": 0.6307692307692307,
+      "precision": 0.18153846153846154,
+      "mrr": 0.6235897435897435
+    }
+  },
+  "hybrid_alpha_0.7": {
+    "top_k": 5,
+    "per_query": [
+      {
+        "id": "sh_001",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_002",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_003",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_004",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_005",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "sh_006",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_007",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_008",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_009",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_010",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "mh_001",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_002",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.6,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_003",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_004",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_011",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_012",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_013",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_014",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_015",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_016",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_017",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "sh_018",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_019",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_020",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_005",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_006",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_007",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_008",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_009",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_021",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_022",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_023",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_024",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_025",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "sh_026",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_027",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_028",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_029",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_030",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_010",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_011",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_012",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_013",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_014",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_015",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.6666666666666666,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_031",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_032",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_033",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "sh_034",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_035",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_036",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_037",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_038",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_039",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_040",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "mh_016",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_017",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_018",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_019",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_020",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_021",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_022",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_023",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "mh_024",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_025",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.5
+      }
+    ],
+    "by_category": {
+      "single_hop": {
+        "n": 40,
+        "hit_rate": 0.725,
+        "recall": 0.7,
+        "precision": 0.15,
+        "mrr": 0.5525
+      },
+      "multi_hop": {
+        "n": 25,
+        "hit_rate": 0.92,
+        "recall": 0.58,
+        "precision": 0.256,
+        "mrr": 0.7466666666666667
+      }
+    },
+    "overall": {
+      "n": 65,
+      "hit_rate": 0.8,
+      "recall": 0.6538461538461539,
+      "precision": 0.19076923076923077,
+      "mrr": 0.6271794871794871
+    }
+  },
+  "hybrid_alpha_0.5": {
+    "top_k": 5,
+    "per_query": [
+      {
+        "id": "sh_001",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_002",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_003",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_004",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_005",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "sh_006",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_007",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_008",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_009",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_010",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_001",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_002",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.6,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_003",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_004",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_011",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_012",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_013",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_014",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_015",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_016",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_017",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "sh_018",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_019",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_020",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_005",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_006",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_007",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_008",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_009",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_021",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_022",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_023",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_024",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_025",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "sh_026",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_027",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_028",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_029",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_030",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_010",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_011",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_012",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_013",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_014",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_015",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.6666666666666666,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_031",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_032",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_033",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_034",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_035",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_036",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_037",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_038",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_039",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_040",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_016",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_017",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_018",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_019",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_020",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_021",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_022",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_023",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "mh_024",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_025",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.6666666666666666,
+        "precision": 0.4,
+        "mrr": 0.5
+      }
+    ],
+    "by_category": {
+      "single_hop": {
+        "n": 40,
+        "hit_rate": 0.7,
+        "recall": 0.6875,
+        "precision": 0.15,
+        "mrr": 0.5433333333333333
+      },
+      "multi_hop": {
+        "n": 25,
+        "hit_rate": 0.88,
+        "recall": 0.5733333333333334,
+        "precision": 0.256,
+        "mrr": 0.7366666666666667
+      }
+    },
+    "overall": {
+      "n": 65,
+      "hit_rate": 0.7692307692307693,
+      "recall": 0.6435897435897436,
+      "precision": 0.19076923076923077,
+      "mrr": 0.6176923076923077
+    }
+  },
+  "hybrid_alpha_0.3": {
+    "top_k": 5,
+    "per_query": [
+      {
+        "id": "sh_001",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_002",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_003",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_004",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_005",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_006",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_007",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_008",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_009",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "sh_010",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "mh_001",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_002",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.6,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_003",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_004",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_011",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_012",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_013",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_014",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_015",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_016",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_017",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_018",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_019",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_020",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_005",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_006",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_007",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_008",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_009",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_021",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_022",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_023",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_024",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_025",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
+      },
+      {
+        "id": "sh_026",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_027",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "sh_028",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_029",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_030",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_010",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_011",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_012",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_013",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_014",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_015",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.6666666666666666,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_031",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_032",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_033",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_034",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_035",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_036",
+        "category": "single_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "sh_037",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_038",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "sh_039",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "sh_040",
+        "category": "single_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_016",
+        "category": "multi_hop",
+        "hit": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "mrr": 0.0
+      },
+      {
+        "id": "mh_017",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_018",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_019",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_020",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.25
+      },
+      {
+        "id": "mh_021",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_022",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 1.0
+      },
+      {
+        "id": "mh_023",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.5,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
+      },
+      {
+        "id": "mh_024",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.5
+      },
+      {
+        "id": "mh_025",
+        "category": "multi_hop",
+        "hit": 1.0,
+        "recall": 0.6666666666666666,
+        "precision": 0.4,
+        "mrr": 0.3333333333333333
+      }
+    ],
+    "by_category": {
+      "single_hop": {
+        "n": 40,
+        "hit_rate": 0.7,
+        "recall": 0.6875,
+        "precision": 0.15,
+        "mrr": 0.5508333333333334
+      },
+      "multi_hop": {
+        "n": 25,
+        "hit_rate": 0.88,
+        "recall": 0.5933333333333334,
+        "precision": 0.264,
+        "mrr": 0.71
+      }
+    },
+    "overall": {
+      "n": 65,
+      "hit_rate": 0.7692307692307693,
+      "recall": 0.6512820512820513,
+      "precision": 0.19384615384615386,
+      "mrr": 0.612051282051282
+    }
+  }
+}
