@@ -2,23 +2,21 @@
 Generation.
 
 Takes retrieved chunks + a user query, generates an answer via the
-Claude API, constrained to answer ONLY from retrieved context, with an
-explicit "not enough information" fallback -- this fallback behavior is
-itself what the no_answer QA category tests (refusal vs hallucination).
+local Qwen2.5-3B-Instruct model (app/generation/local_llm.py),
+constrained to answer ONLY from retrieved context, with an explicit
+"not enough information" fallback -- this fallback behavior is itself
+what the no_answer QA category tests (refusal vs hallucination).
+
+Switched from Claude API to a local model when Anthropic API credits
+ran out and the decision was made not to renew -- verified via
+scripts/verify_local_llm.py that Qwen2.5-3B-Instruct correctly exhibits
+the refusal behavior before wiring it in here.
 """
 
-import os
-
-from anthropic import Anthropic
-from dotenv import load_dotenv
-
-load_dotenv()
-
-_client: Anthropic | None = None
-_MODEL = "claude-sonnet-4-5-20250929"
+from app.generation.local_llm import generate as llm_generate
 
 _SYSTEM_PROMPT = """You are a documentation assistant answering questions about FastAPI \
-using ONLY the provided context chunks. 
+using ONLY the provided context chunks.
 
 Rules:
 - Answer only using information present in the context below. Do not use outside knowledge.
@@ -27,13 +25,6 @@ exactly: "I don't have enough information in the provided context to answer this
 Do not guess or fill gaps with general knowledge.
 - Be concise and direct. Cite which part of the context supports your answer where natural.
 """
-
-
-def _get_client() -> Anthropic:
-    global _client
-    if _client is None:
-        _client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-    return _client
 
 
 def generate_answer(query: str, retrieved_chunks: list[dict]) -> dict:
@@ -50,13 +41,6 @@ def generate_answer(query: str, retrieved_chunks: list[dict]) -> dict:
 
     user_message = f"Context:\n\n{context_text}\n\n---\n\nQuestion: {query}"
 
-    client = _get_client()
-    response = client.messages.create(
-        model=_MODEL,
-        max_tokens=500,
-        system=_SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_message}],
-    )
-    answer_text = response.content[0].text
+    answer_text = llm_generate(_SYSTEM_PROMPT, user_message, max_new_tokens=500)
 
     return {"answer": answer_text, "context_used": retrieved_chunks}
