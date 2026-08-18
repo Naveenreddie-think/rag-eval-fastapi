@@ -6,10 +6,10 @@ An empirically evaluated, structure-aware Retrieval-Augmented Generation (RAG) s
 1. **Corpus + Ingestion** ✅: Sparse-checkout git loader with automatic `{ * docs_src/... * }` snippet resolution and fence-aware markdown header chunker.
 2. **Embedding + Vector Store** ✅: `BAAI/bge-m3` dense embeddings (1024d) indexed in Qdrant Cloud.
 3. **Hybrid Retrieval + Reranking** ✅: Rank-BM25 + Dense Qdrant fused via RRF ($k=60$) and reranked using `ms-marco-MiniLM-L-6-v2` with alpha score blending ($\alpha=0.7$).
-4. **Hand-Built Evaluation Dataset** ✅: 80 curated QA pairs across `single_hop` (50), `multi_hop` (15), and `no_answer` (15) with exact source anchor mappings.
+4. **Hand-Built Evaluation Dataset** ✅: 80 curated QA pairs across `single_hop` (40), `multi_hop` (25), and `no_answer` (15) with exact source anchor mappings.
 5. **Evaluation Methodology** ✅: Hit Rate@k, Recall@k, Precision@k, MRR, explainable atomic claim faithfulness metric, and comparison against RAGAS framework.
 6. **Security Evaluation** ✅: Poisoned-document indirect prompt injection and insecure guidance test suite.
-7. **Serving & User Interface** ✅: Production FastAPI REST backend (`/api/query`, `/api/health`, `/api/metrics`) and interactive Streamlit UI with real-time latency diagnostics.
+7. **Serving & User Interface** ✅: Local FastAPI REST backend (`/api/query`, `/api/health`, `/api/metrics`) and interactive Streamlit UI with real-time latency diagnostics.
 
 See `FINDINGS.md` for measured benchmarks, failure analyses, and architectural decisions.
 
@@ -46,6 +46,9 @@ python -m scripts.run_security_eval
 ```
 
 ### 4. Start Serving Backend & Interactive UI
+
+`fastapi`, `starlette`, and `streamlit` are pinned in `requirements.txt` deliberately, not just "latest" -- they have a real transitive dependency conflict (old fastapi needs old starlette's Router API, streamlit needs a newer starlette for its gzip middleware import). Upgrading any one of the three individually will likely break one of the others; if you need to move any of them, re-verify all three still boot before committing the change.
+
 ```powershell
 # Start FastAPI REST API (http://localhost:8000/docs)
 python -m app.api.main
