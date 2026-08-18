@@ -16,8 +16,7 @@ from ragas.metrics import faithfulness
 
 from app.retrieval.dense import dense_search
 from app.eval.qa_dataset import load_qa_pairs
-import os
-from app.eval.ragas_llm import ClaudeRagasLLM, LocalQwenRagasLLM
+from app.eval.ragas_llm import LocalQwenRagasLLM
 
 TOP_K = 5
 RESULTS_PATH = "data/processed/generation_eval_results.json"
@@ -49,12 +48,8 @@ def main() -> None:
         for r in rows
     ])
 
-    if os.getenv("ANTHROPIC_API_KEY"):
-        print("Using ClaudeRagasLLM (Anthropic API)")
-        faithfulness.llm = ClaudeRagasLLM()
-    else:
-        print("Using LocalQwenRagasLLM (Local Qwen2.5-3B-Instruct)")
-        faithfulness.llm = LocalQwenRagasLLM()
+    print("Using LocalQwenRagasLLM (Local Qwen2.5-3B-Instruct)")
+    faithfulness.llm = LocalQwenRagasLLM()
 
     result = evaluate(dataset, metrics=[faithfulness])
     result_df = result.to_pandas()

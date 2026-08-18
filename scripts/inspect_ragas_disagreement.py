@@ -12,7 +12,7 @@ import json
 
 from app.retrieval.dense import dense_search
 from app.eval.qa_dataset import load_qa_pairs
-from app.eval.ragas_llm import ClaudeRagasLLM
+from app.eval.ragas_llm import LocalQwenRagasLLM
 from ragas.metrics import faithfulness
 
 TOP_K = 5
@@ -58,7 +58,7 @@ async def inspect_case(pid: str, question: str, answer: str, context_texts: list
 
 
 async def main() -> None:
-    faithfulness.llm = ClaudeRagasLLM()
+    faithfulness.llm = LocalQwenRagasLLM()
 
     generation_results = {
         r["id"]: r for r in json.loads(open("data/processed/generation_eval_results.json", encoding="utf-8").read())
