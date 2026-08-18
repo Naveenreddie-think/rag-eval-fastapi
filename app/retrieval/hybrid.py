@@ -117,8 +117,8 @@ def rerank(query: str, candidates: list[dict], top_k: int = 5,
 
 
 def hybrid_search(query: str, top_k: int = 5, fusion_pool: int = 20,
-                   blend_alpha: float = 0.7) -> dict:    
-"""Full pipeline: dense + BM25 search (each retrieving fusion_pool
+                  blend_alpha: float = 0.7) -> dict:    
+    """Full pipeline: dense + BM25 search (each retrieving fusion_pool
     candidates) -> RRF fusion -> cross-encoder rerank, blended with RRF
     score (blend_alpha=1.0 for old pure-reranker behavior).
 

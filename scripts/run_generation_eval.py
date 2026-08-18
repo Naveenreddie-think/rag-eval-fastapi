@@ -1,11 +1,7 @@
 """
-Step 5 entry point: full generation + faithfulness eval across all 80
-QA pairs.
-
-Saves incrementally after every pair (not just at the end) and resumes
-from an existing results file if one is present -- a prior run crashed
-33/80 pairs in on a parsing bug, and losing all 33 already-paid-for API
-calls to a crash at pair 34 was wasteful and avoidable.
+Step 5 entry point: full generation + faithfulness eval, split into two
+phases to avoid VRAM exhaustion (confirmed via Task Manager: running
+retrieval and generation models simultaneously filled all 8GB VRAM).
 
 Run with: python -m scripts.run_generation_eval
 """
@@ -13,78 +9,98 @@ Run with: python -m scripts.run_generation_eval
 import json
 from pathlib import Path
 
-from app.retrieval.bm25 import build_bm25_index
 from app.retrieval.dense import dense_search
+from app.embeddings.embedder import unload_model
 from app.generation.generator import generate_answer
 from app.eval.faithfulness import custom_faithfulness_score, is_refusal_response
 from app.eval.qa_dataset import load_qa_pairs, validate_qa_pairs
 
 TOP_K = 5
+RETRIEVAL_CACHE_PATH = Path("data/processed/retrieval_cache.json")
 RESULTS_PATH = Path("data/processed/generation_eval_results.json")
 
 
-def _load_existing_results() -> dict:
-    if RESULTS_PATH.exists():
-        rows = json.loads(RESULTS_PATH.read_text(encoding="utf-8"))
-        return {r["id"]: r for r in rows}
+def _load_json_dict(path: Path) -> dict:
+    if path.exists():
+        rows = json.loads(path.read_text(encoding="utf-8"))
+        return {r["id"]: r for r in rows} if isinstance(rows, list) else rows
     return {}
 
 
-def _save_results(results_by_id: dict) -> None:
-    RESULTS_PATH.write_text(json.dumps(list(results_by_id.values()), indent=2), encoding="utf-8")
+def _save_dict_as_list(path: Path, d: dict) -> None:
+    path.write_text(json.dumps(list(d.values()), indent=2), encoding="utf-8")
 
 
-def main() -> None:
-    chunks = json.loads(open("data/processed/chunks.json", encoding="utf-8").read())
-    build_bm25_index(chunks)
+def phase1_retrieval(qa_pairs: list[dict]) -> dict:
+    cache = _load_json_dict(RETRIEVAL_CACHE_PATH)
+    if cache:
+        print(f"Retrieval cache: {len(cache)}/{len(qa_pairs)} pairs already cached.")
 
-    qa_pairs = load_qa_pairs()
-    validate_qa_pairs(qa_pairs)
+    for i, pair in enumerate(qa_pairs, start=1):
+        if pair["id"] in cache:
+            continue
+        print(f"[retrieval {i}/{len(qa_pairs)}] {pair['id']}")
+        retrieved = dense_search(pair["question"], top_k=TOP_K)
+        cache[pair["id"]] = {"id": pair["id"], "retrieved": retrieved}
+        _save_dict_as_list(RETRIEVAL_CACHE_PATH, cache)
 
-    results_by_id = _load_existing_results()
+    print("Phase 1 (retrieval) complete. Freeing embedding model GPU memory...")
+    unload_model()
+    return cache
+
+
+def phase2_generation(qa_pairs: list[dict], retrieval_cache: dict) -> None:
+    results_by_id = _load_json_dict(RESULTS_PATH)
     if results_by_id:
-        print(f"Resuming: {len(results_by_id)}/{len(qa_pairs)} pairs already completed.")
+        print(f"Resuming generation: {len(results_by_id)}/{len(qa_pairs)} pairs already done.")
 
     for i, pair in enumerate(qa_pairs, start=1):
         if pair["id"] in results_by_id:
             continue
 
-        print(f"[{i}/{len(qa_pairs)}] {pair['id']} [{pair['category']}]")
-        retrieved = dense_search(pair["question"], top_k=TOP_K)
+        print(f"[generation {i}/{len(qa_pairs)}] {pair['id']} [{pair['category']}]")
+        retrieved = retrieval_cache[pair["id"]]["retrieved"]
         gen = generate_answer(pair["question"], retrieved)
         answer = gen["answer"]
+        print(f"    generated answer ({len(answer)} chars)")
 
         row = {"id": pair["id"], "category": pair["category"], "answer": answer}
 
         if pair["category"] == "no_answer":
             row["correctly_refused"] = is_refusal_response(answer)
         else:
+            print("    scoring faithfulness...")
             faith = custom_faithfulness_score(answer, retrieved)
             row["faithfulness_score"] = faith["score"]
             row["is_refusal"] = faith["is_refusal"]
             row["claims"] = faith["claims"]
             if faith["is_refusal"]:
-                print(f"    WARNING: {pair['id']} ({pair['category']}) was refused "
-                      f"entirely -- retrieval likely failed to surface relevant context")
+                print(f"    WARNING: {pair['id']} unexpectedly refused")
+            else:
+                print(f"    faithfulness: {faith['score']:.2f} ({len(faith['claims'])} claims)")
 
         results_by_id[pair["id"]] = row
-        _save_results(results_by_id)
+        _save_dict_as_list(RESULTS_PATH, results_by_id)
 
     results = list(results_by_id.values())
-
     for cat in ("single_hop", "multi_hop"):
         rows = [r for r in results if r["category"] == cat and not r.get("is_refusal")]
         scores = [r["faithfulness_score"] for r in rows]
         avg = sum(scores) / len(scores) if scores else 0.0
         refused = sum(1 for r in results if r["category"] == cat and r.get("is_refusal"))
-        print(f"\n{cat}: avg faithfulness = {avg:.3f} (n={len(rows)}, "
-              f"{refused} unexpectedly refused)")
+        print(f"\n{cat}: avg faithfulness = {avg:.3f} (n={len(rows)}, {refused} unexpectedly refused)")
 
     no_answer_rows = [r for r in results if r["category"] == "no_answer"]
     refusal_accuracy = sum(r["correctly_refused"] for r in no_answer_rows) / len(no_answer_rows)
     print(f"no_answer: refusal accuracy = {refusal_accuracy:.3f} (n={len(no_answer_rows)})")
+    print(f"\nSaved to {RESULTS_PATH}")
 
-    print(f"\nSaved full results to {RESULTS_PATH}")
+
+def main() -> None:
+    qa_pairs = load_qa_pairs()
+    validate_qa_pairs(qa_pairs)
+    retrieval_cache = phase1_retrieval(qa_pairs)
+    phase2_generation(qa_pairs, retrieval_cache)
 
 
 if __name__ == "__main__":

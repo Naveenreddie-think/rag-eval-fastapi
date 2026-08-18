@@ -50,7 +50,7 @@ hybrid comparison, especially query 3, where BM25 keyword matching on
 
 Initial hypothesis: the reranker never sees the ground truth chunk because
 
-`hybrid\_search()`'s fusion\_pool=20 truncates the RRF-fused list before
+`hybrid\\\\\\\_search()`'s fusion\_pool=20 truncates the RRF-fused list before
 
 reranking. \*\*Tested directly and disproven\*\*: across all 7 regression
 
@@ -74,7 +74,7 @@ expense of the chunk that actually states the canonical answer:
 
 
 
-\- `sh\_009` ("What library is TestClient built on?"): the correct chunk
+\- `sh\\\\\\\_009` ("What library is TestClient built on?"): the correct chunk
 
 &#x20; (`tutorial/testing.md`, states "It is based on HTTPX...") scored
 
@@ -86,7 +86,7 @@ expense of the chunk that actually states the canonical answer:
 
 &#x20; correct chunk's header doesn't.
 
-\- `mh\_012` (multi-hop, Response Directly + jsonable\_encoder): all 20
+\- `mh\\\\\\\_012` (multi-hop, Response Directly + jsonable\_encoder): all 20
 
 &#x20; pooled candidates cluster around "Response"-family vocabulary. The one
 
@@ -178,6 +178,74 @@ chunk is found at all); hybrid+rerank's value here is narrower than the
 
 "hybrid is generally better" assumption common in RAG literature.
 
+\### Mid-project pivot: Claude API -> local Qwen2.5-3B-Instruct for generation
+
+
+
+Anthropic API credits ran out during Step 5's RAGAS comparison work;
+
+decided not to renew, so generation (and the faithfulness metric's LLM
+
+calls) moved to a local open-weight model instead.
+
+
+
+\*\*Kept as a baseline, not discarded\*\*: the original Claude-based Step 5
+
+generation eval results (single\_hop faithfulness 0.971, multi\_hop 0.914,
+
+no\_answer refusal accuracy 1.000/15) are preserved at
+
+data/processed/generation\_eval\_results\_claude.json rather than
+
+overwritten -- Step 5's generation eval is being re-run in full with the
+
+local model specifically to produce a genuine, real "hosted frontier
+
+model vs. local open-weight model" comparison, not just to move forward.
+
+
+
+\*\*Model choice reasoning\*\*: Qwen2.5-3B-Instruct at bf16, via plain
+
+transformers (no quantization). Given the GPU's already-fragile
+
+Blackwell/sm\_120 compatibility (required PyTorch nightly cu128 just for
+
+embeddings), deliberately avoided introducing bitsandbytes as a NEW
+
+unverified risk on top of that. A 3B model fits in the available 8GB
+
+VRAM alongside BGE-M3 + the reranker without quantization. Same
+
+transformers/torch stack already working, and the natural on-ramp if
+
+LoRA/QLoRA fine-tuning is pursued later (HuggingFace checkpoint format,
+
+not a GGUF/Ollama detour that would need converting back).
+
+
+
+\*\*A smaller local model needed real, different reliability engineering
+
+than the hosted Claude API did\*\* -- documented in detail in
+
+app/eval/faithfulness.py's docstrings and the Step 5 generation-eval
+
+section below. The short version: Qwen2.5-3B is noticeably less
+
+reliable at structured/self-judging output tasks (exact JSON array
+
+length, self-classifying refusal vs. non-refusal) than Claude Sonnet 4.5
+
+was, and the fix in each case was to either simplify the output format
+
+(JSON -> plain lines) or remove the model's need to make a judgment call
+
+we could already make reliably in code -- not to keep patching prompts
+
+indefinitely.
+
 
 
 
@@ -242,6 +310,24 @@ repeated/similar queries, not cutting the reranking or BM25 stages,
 
 which are already cheap.
 
+\### Step 4: blind re-check (10/80 pairs, seed=42)
+
+
+
+Random sample of 10 QA pairs re-verified independently after Step 5 was
+
+underway (not the exact "next day" gap originally planned, but genuinely
+
+after enough time/distance that the pairs weren't fresh in mind).
+
+0/10 errors found in this sample. Combined with the sh\_014 error already
+
+caught and fixed via unrelated debugging earlier (see Step 5 findings),
+
+this is reasonable evidence the eval set's overall error rate is low,
+
+though not proof of zero remaining errors across all 80.
+
 ### Retrieval precision/recall
 
 (table goes here -- per config)
@@ -276,13 +362,13 @@ taxonomy.
 
 \*\*Bug 3 -- cross-platform path separator mismatch.\*\*
 
-`load\\\\\\\_local\\\\\\\_docs()` used `str(md\\\\\\\_path.relative\\\\\\\_to(docs\\\\\\\_root))` to build
+`load\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_local\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_docs()` used `str(md\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_path.relative\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_to(docs\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_root))` to build
 
-each chunk's `source\\\\\\\_path`. On Linux this produces forward slashes
+each chunk's `source\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_path`. On Linux this produces forward slashes
 
 (`tutorial/metadata.md`); on Windows, `pathlib` produces backslashes
 
-(`tutorial\\\\\\\\metadata.md`). Tests that only checked non-emptiness or counts
+(`tutorial\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\metadata.md`). Tests that only checked non-emptiness or counts
 
 passed on both platforms; tests that matched an exact source\_path string
 
@@ -296,13 +382,13 @@ kind of platform-specific bug Project 1's `sys.executable` note existed
 
 to pre-empt, and this one slipped through anyway. Fixed by replacing
 
-`str(path.relative\\\\\\\_to(root))` with `path.relative\\\\\\\_to(root).as\\\\\\\_posix()`,
+`str(path.relative\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_to(root))` with `path.relative\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_to(root).as\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_posix()`,
 
 which forces forward slashes regardless of OS. Any future code that
 
-stores or compares `source\\\\\\\_path` (the eval set in Step 4 especially)
+stores or compares `source\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_path` (the eval set in Step 4 especially)
 
-depends on this being consistent -- worth remembering why `as\\\\\\\_posix()`
+depends on this being consistent -- worth remembering why `as\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_posix()`
 
 is there, not just that it is.
 

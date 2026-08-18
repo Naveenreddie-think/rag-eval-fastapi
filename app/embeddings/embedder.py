@@ -42,3 +42,9 @@ def embed_query(query: str) -> list[float]:
     BGE-M3 doesn't need a different instruction prefix for queries vs.
     documents, unlike e.g. e5-family models)."""
     return embed([query])[0]
+def unload_model() -> None:
+    """Free the embedding model's GPU memory."""
+    global _model
+    import torch
+    _model = None
+    torch.cuda.empty_cache()

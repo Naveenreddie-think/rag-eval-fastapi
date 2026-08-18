@@ -34,11 +34,23 @@ def build_bm25_index(chunks: list[dict]) -> None:
     _bm25 = BM25Okapi(tokenized_corpus)
 
 
+def _ensure_initialized() -> None:
+    global _bm25, _chunks
+    if _bm25 is None or _chunks is None:
+        import json
+        from pathlib import Path
+        chunks_path = Path("data/processed/chunks.json")
+        if chunks_path.exists():
+            chunks = json.loads(chunks_path.read_text(encoding="utf-8"))
+            build_bm25_index(chunks)
+        else:
+            raise RuntimeError("BM25 index not built and data/processed/chunks.json not found -- call build_bm25_index() first")
+
+
 def bm25_search(query: str, top_k: int = 5) -> list[dict]:
     """Return top_k chunks by BM25 score. Returns list of
     {"id", "score", "source_path", "header_path", "text"}."""
-    if _bm25 is None or _chunks is None:
-        raise RuntimeError("BM25 index not built -- call build_bm25_index() first")
+    _ensure_initialized()
 
     tokenized_query = _tokenize(query)
     scores = _bm25.get_scores(tokenized_query)

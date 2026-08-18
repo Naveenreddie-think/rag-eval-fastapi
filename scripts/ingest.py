@@ -13,7 +13,14 @@ from app.ingestion.chunker import chunk_by_headers
 OUTPUT_PATH = Path("data/processed/chunks.json")
 
 
+import argparse
+
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Ingest FastAPI documentation into chunks.json and optionally Qdrant.")
+    parser.add_argument("--sync-qdrant", action="store_true", help="Also embed and upsert chunks into Qdrant Cloud collection")
+    parser.add_argument("--recreate-collection", action="store_true", help="Drop and recreate Qdrant collection if syncing")
+    args = parser.parse_args()
+
     fetch_docs()
     docs = load_local_docs()
     print(f"Loaded {len(docs)} docs")
@@ -36,6 +43,13 @@ def main() -> None:
     OUTPUT_PATH.write_text(json.dumps(all_chunks, indent=2), encoding="utf-8")
     print(f"Wrote {len(all_chunks)} chunks to {OUTPUT_PATH}")
     print("\nVerification: PASSED")
+
+    if args.sync_qdrant:
+        from app.retrieval.dense import create_collection, upsert_chunks
+        print("\nSyncing chunks to Qdrant Cloud...")
+        create_collection(recreate=args.recreate_collection)
+        upsert_chunks(all_chunks)
+        print("Qdrant synchronization complete.")
 
 
 if __name__ == "__main__":

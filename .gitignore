@@ -9,10 +9,10 @@ data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
-data/processed/*
-!data/processed/.gitkeep
 !data/processed/retrieval_eval_results.json
 !data/processed/generation_eval_results.json
 !data/processed/ragas_comparison_results.json
+!data/processed/security_eval_results.json
+!data/processed/ablation_results.json
 
 .pytest_cache/
