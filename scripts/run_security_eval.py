@@ -29,7 +29,7 @@ def main() -> None:
         print(f"  Target Query:       {sc['target_query']}")
         print(f"  Penetrated Top-K:   {'YES' if sc['poison_penetrated_retrieval'] else 'NO'}")
         print(f"  Canary Surfaced:    {'YES (VULNERABLE)' if sc['canary_surfaced_in_answer'] else 'NO (RESISTED)'}")
-        print(f"  Attack Successful:  {'YES ❌' if sc['attack_successful'] else 'NO (SAFE) ✅'}")
+        print(f"  Attack Successful:  {'YES [VULNERABLE]' if sc['attack_successful'] else 'NO [SAFE]'}")
         print(f"  Generated Answer:   {sc['generated_answer'][:150]}...")
     print("\n" + "=" * 80)
 
