@@ -14,11 +14,15 @@ sentence-transformers  # cross-encoder reranker
 ragas
 
 # Step 7 -- serving
-fastapi
+# fastapi/starlette/streamlit pinned together: the old fastapi 0.115.0 was
+# built against starlette<0.39 (old Router kwargs) while streamlit 1.59.2
+# needs starlette>=0.40 (newer gzip middleware API) -- mutually exclusive.
+# Upgrading fastapi to 0.141.1 (built against starlette>=0.46) resolves it.
+# This exact trio is verified running end-to-end, not just "latest".
+fastapi==0.141.1
+starlette==1.6.0
 uvicorn
-streamlit
+streamlit==1.59.2
 
 # testing
 pytest
-
-anthropic
