@@ -10,6 +10,16 @@ qdrant-client
 rank-bm25
 sentence-transformers  # cross-encoder reranker
 
+# app/generation/local_llm.py (Qwen2.5-3B-Instruct) imports transformers
+# directly -- pinned explicitly rather than relying on whatever version
+# sentence-transformers happens to pull in transitively.
+# NOTE: torch itself is intentionally NOT listed here -- this project
+# requires a PyTorch NIGHTLY cu128 build for Blackwell/sm_120 GPU support,
+# which isn't on the default PyPI index. It's installed as a separate,
+# explicit step in the Dockerfile; for local (non-Docker) setup, install it
+# the same way -- see the Dockerfile's torch RUN step for the exact command.
+transformers==5.5.0
+
 # Step 4/5 -- evaluation
 ragas
 

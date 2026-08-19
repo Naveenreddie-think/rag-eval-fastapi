@@ -1,0 +1,31 @@
+# Version control
+.git/
+.gitignore
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+
+# Raw corpus -- regenerable via scripts/ingest.py, not needed at runtime
+# (data/processed/ IS needed and is intentionally not excluded here)
+data/raw/
+
+# Secrets -- passed at runtime via docker-compose env_file, never baked
+# into the image
+.env
+
+# Not needed inside the serving image
+scripts/
+eval/
+tests/
+*.md
+
+# Docker meta files themselves
+Dockerfile
+docker-compose.yml
+.dockerignore

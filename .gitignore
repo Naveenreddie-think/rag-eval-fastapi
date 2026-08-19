@@ -14,5 +14,10 @@ data/processed/*
 !data/processed/ragas_comparison_results.json
 !data/processed/security_eval_results.json
 !data/processed/ablation_results.json
+!data/processed/full_ablation_matrix.json
+!data/processed/reranker_finetune_results.json
+
+# Model checkpoints
+models/
 
 .pytest_cache/
