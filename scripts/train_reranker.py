@@ -132,10 +132,7 @@ def main() -> None:
     print("\n[2/3] Fine-tuning Cross-Encoder on FastAPI Technical Documentation...")
     train_dataloader = DataLoader(train_samples, shuffle=True, batch_size=8)
     
-    val_texts1 = [x.texts[0] for x in val_samples]
-    val_texts2 = [x.texts[1] for x in val_samples]
-    val_labels = [int(x.label) for x in val_samples]
-    evaluator = CEBinaryClassificationEvaluator(val_texts1, val_texts2, val_labels, name="fastapi_val")
+    evaluator = CEBinaryClassificationEvaluator.from_input_examples(val_samples, name="fastapi_val")
 
     os.makedirs(OUTPUT_MODEL_DIR, exist_ok=True)
     base_model.fit(

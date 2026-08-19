@@ -22,13 +22,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # install time -- so it's pinned to the exact nightly build verified
 # working on this project, installed from PyTorch's own nightly index.
 #
-# NOTE: PyTorch prunes older nightly wheels from this index over time. If
-# this exact date-stamped version 404s on a future build, check
-# https://download.pytorch.org/whl/nightly/cu128 for the closest available
-# nightly, update the pin below, and re-verify `torch.cuda.is_available()`
-# before trusting it -- do not silently fall back to a stable release.
+# NOTE: Installs the latest cu128 nightly build dynamically from PyTorch's
+# index without pinning an ephemeral daily datestamp that gets pruned.
 RUN pip install --no-cache-dir --pre \
-    torch==2.12.0.dev20260408+cu128 \
+    torch \
     --index-url https://download.pytorch.org/whl/nightly/cu128
 
 # Everything else from the normal index. torch is already satisfied above

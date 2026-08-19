@@ -1,3 +1,13 @@
+---
+title: FastAPI Docs RAG Evaluator
+emoji: ⚡
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 8501
+pinned: false
+---
+
 # FastAPI Documentation RAG System with Real Evaluation
 
 An empirically evaluated, structure-aware Retrieval-Augmented Generation (RAG) system built over the official FastAPI documentation (Tutorial and Advanced User Guide).

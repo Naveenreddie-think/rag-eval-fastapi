@@ -19,5 +19,6 @@ data/processed/*
 
 # Model checkpoints
 models/
+checkpoints/
 
 .pytest_cache/

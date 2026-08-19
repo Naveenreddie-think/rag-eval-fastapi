@@ -424,6 +424,29 @@ Evaluated attack penetration and execution rates against poisoned documentation 
 
 ---
 
+### Step 8: Domain-Specific Cross-Encoder Reranker Fine-Tuning
+
+To resolve the vocabulary-clustering bias diagnosed in Step 3/5 where off-the-shelf MS MARCO rerankers demoted canonical technical documentation chunks, we fine-tuned `cross-encoder/ms-marco-MiniLM-L-6-v2` directly on FastAPI documentation QA pairs with hard negative mining.
+
+**Training Setup**:
+- **Dataset**: 290 training pairs, 72 validation pairs mined from dense + BM25 reciprocal rank fusion pools.
+- **Hardware & Epochs**: 3 epochs on RTX 5060 Laptop GPU (14.9s total training runtime).
+- **Saved Model**: `models/fastapi-reranker-minilm/`
+- **Output Metrics**: `data/processed/reranker_finetune_results.json`
+
+**Measured Ranking Performance (Before vs. After Domain Adaptation)**:
+
+| Metric | Baseline (Off-the-Shelf) | Fine-Tuned (Domain-Adapted) | Absolute Delta | Relative Gain |
+|---|---|---|---|---|
+| **Hit Rate@5** | 0.769 | **0.877** | **+0.108** | **+14.0%** |
+| **Recall@5** | 0.631 | **0.744** | **+0.113** | **+17.9%** |
+| **Precision@5** | 0.182 | **0.218** | **+0.037** | **+20.3%** |
+| **MRR (Ranking Quality)** | 0.624 | **0.739** | **+0.115** | **+18.4%** |
+
+**Empirical Conclusion**: Domain-specific fine-tuning with hard negative mining significantly outperformed off-the-shelf models, lifting MRR from 0.624 to 0.739 and Hit Rate@5 from 0.769 to 0.877.
+
+---
+
 ## Honest Limitations
 
 1. **Multi-Hop Synthesis Degradation**:
