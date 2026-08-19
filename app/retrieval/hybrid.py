@@ -28,6 +28,7 @@ candidate pool before blending, since RRF scores and cross-encoder
 logits are on very different, non-comparable scales too.
 """
 
+import os
 import time
 
 from sentence_transformers import CrossEncoder
@@ -35,14 +36,26 @@ from sentence_transformers import CrossEncoder
 from app.retrieval.bm25 import bm25_search
 from app.retrieval.dense import dense_search
 
-_CROSS_ENCODER_NAME = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+# Step 8: domain-adapted cross-encoder, fine-tuned on FastAPI docs QA pairs
+# with hard negative mining (see scripts/train_reranker.py, FINDINGS.md).
+# The weight file is large (~87MB, tracked via Git LFS) -- a clone without
+# LFS pulled, or without `git lfs pull` run, won't have it, so this falls
+# back to the off-the-shelf model rather than crashing.
+_FINETUNED_CROSS_ENCODER_PATH = "models/fastapi-reranker-minilm"
+_FALLBACK_CROSS_ENCODER_NAME = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 _cross_encoder: CrossEncoder | None = None
 
 
 def _get_cross_encoder() -> CrossEncoder:
     global _cross_encoder
     if _cross_encoder is None:
-        _cross_encoder = CrossEncoder(_CROSS_ENCODER_NAME, device="cuda")
+        if os.path.isdir(_FINETUNED_CROSS_ENCODER_PATH):
+            print(f"Loading domain-adapted fine-tuned cross-encoder from {_FINETUNED_CROSS_ENCODER_PATH}")
+            _cross_encoder = CrossEncoder(_FINETUNED_CROSS_ENCODER_PATH, device="cuda")
+        else:
+            print(f"Fine-tuned reranker not found at {_FINETUNED_CROSS_ENCODER_PATH} -- "
+                  f"falling back to off-the-shelf {_FALLBACK_CROSS_ENCODER_NAME}")
+            _cross_encoder = CrossEncoder(_FALLBACK_CROSS_ENCODER_NAME, device="cuda")
     return _cross_encoder
 
 

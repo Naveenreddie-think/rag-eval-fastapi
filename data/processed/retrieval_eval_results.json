@@ -588,7 +588,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.2
       },
       {
         "id": "sh_006",
@@ -625,10 +625,10 @@
       {
         "id": "sh_010",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
       },
       {
         "id": "mh_001",
@@ -650,8 +650,8 @@
         "id": "mh_003",
         "category": "multi_hop",
         "hit": 1.0,
-        "recall": 0.5,
-        "precision": 0.2,
+        "recall": 1.0,
+        "precision": 0.4,
         "mrr": 1.0
       },
       {
@@ -716,7 +716,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.3333333333333333
+        "mrr": 1.0
       },
       {
         "id": "sh_018",
@@ -737,10 +737,10 @@
       {
         "id": "sh_020",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.25
       },
       {
         "id": "mh_005",
@@ -754,8 +754,8 @@
         "id": "mh_006",
         "category": "multi_hop",
         "hit": 1.0,
-        "recall": 0.3333333333333333,
-        "precision": 0.2,
+        "recall": 0.6666666666666666,
+        "precision": 0.4,
         "mrr": 1.0
       },
       {
@@ -778,8 +778,8 @@
         "id": "mh_009",
         "category": "multi_hop",
         "hit": 1.0,
-        "recall": 0.5,
-        "precision": 0.2,
+        "recall": 1.0,
+        "precision": 0.4,
         "mrr": 1.0
       },
       {
@@ -852,7 +852,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.5
+        "mrr": 1.0
       },
       {
         "id": "sh_030",
@@ -881,10 +881,10 @@
       {
         "id": "mh_012",
         "category": "multi_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.5
       },
       {
         "id": "mh_013",
@@ -906,25 +906,25 @@
         "id": "mh_015",
         "category": "multi_hop",
         "hit": 1.0,
-        "recall": 0.6666666666666666,
-        "precision": 0.4,
+        "recall": 1.0,
+        "precision": 0.6,
         "mrr": 1.0
       },
       {
         "id": "sh_031",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_032",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.5
       },
       {
         "id": "sh_033",
@@ -932,7 +932,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.3333333333333333
+        "mrr": 1.0
       },
       {
         "id": "sh_034",
@@ -956,7 +956,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.2
+        "mrr": 0.25
       },
       {
         "id": "sh_037",
@@ -964,7 +964,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.5
+        "mrr": 1.0
       },
       {
         "id": "sh_038",
@@ -980,23 +980,23 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.5
+        "mrr": 1.0
       },
       {
         "id": "sh_040",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 0.5
       },
       {
         "id": "mh_016",
         "category": "multi_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 1.0
       },
       {
         "id": "mh_017",
@@ -1028,7 +1028,7 @@
         "hit": 1.0,
         "recall": 0.3333333333333333,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.5
       },
       {
         "id": "mh_021",
@@ -1052,7 +1052,7 @@
         "hit": 1.0,
         "recall": 0.5,
         "precision": 0.2,
-        "mrr": 0.3333333333333333
+        "mrr": 1.0
       },
       {
         "id": "mh_024",
@@ -1060,7 +1060,7 @@
         "hit": 1.0,
         "recall": 0.3333333333333333,
         "precision": 0.2,
-        "mrr": 0.3333333333333333
+        "mrr": 1.0
       },
       {
         "id": "mh_025",
@@ -1068,31 +1068,31 @@
         "hit": 1.0,
         "recall": 0.3333333333333333,
         "precision": 0.2,
-        "mrr": 0.5
+        "mrr": 0.25
       }
     ],
     "by_category": {
       "single_hop": {
         "n": 40,
-        "hit_rate": 0.7,
-        "recall": 0.6875,
-        "precision": 0.14500000000000002,
-        "mrr": 0.5445833333333334
+        "hit_rate": 0.825,
+        "recall": 0.8125,
+        "precision": 0.175,
+        "mrr": 0.66125
       },
       "multi_hop": {
         "n": 25,
-        "hit_rate": 0.88,
-        "recall": 0.54,
-        "precision": 0.24,
-        "mrr": 0.75
+        "hit_rate": 0.96,
+        "recall": 0.6333333333333333,
+        "precision": 0.28800000000000003,
+        "mrr": 0.8633333333333333
       }
     },
     "overall": {
       "n": 65,
-      "hit_rate": 0.7692307692307693,
-      "recall": 0.6307692307692307,
-      "precision": 0.18153846153846154,
-      "mrr": 0.6235897435897435
+      "hit_rate": 0.8769230769230769,
+      "recall": 0.7435897435897436,
+      "precision": 0.21846153846153848,
+      "mrr": 0.7389743589743589
     }
   },
   "hybrid_alpha_0.7": {
@@ -1101,10 +1101,10 @@
       {
         "id": "sh_001",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
       },
       {
         "id": "sh_002",
@@ -1136,7 +1136,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_006",
@@ -1157,10 +1157,10 @@
       {
         "id": "sh_008",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
       },
       {
         "id": "sh_009",
@@ -1176,7 +1176,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.2
+        "mrr": 0.3333333333333333
       },
       {
         "id": "mh_001",
@@ -1198,8 +1198,8 @@
         "id": "mh_003",
         "category": "multi_hop",
         "hit": 1.0,
-        "recall": 0.5,
-        "precision": 0.2,
+        "recall": 1.0,
+        "precision": 0.4,
         "mrr": 1.0
       },
       {
@@ -1264,7 +1264,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.5
       },
       {
         "id": "sh_018",
@@ -1368,7 +1368,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_026",
@@ -1408,7 +1408,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.2
       },
       {
         "id": "mh_010",
@@ -1461,18 +1461,18 @@
       {
         "id": "sh_031",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.2
       },
       {
         "id": "sh_032",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_033",
@@ -1480,7 +1480,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.2
+        "mrr": 1.0
       },
       {
         "id": "sh_034",
@@ -1528,23 +1528,23 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.5
+        "mrr": 1.0
       },
       {
         "id": "sh_040",
         "category": "single_hop",
         "hit": 1.0,
-        "recall": 0.5,
-        "precision": 0.2,
-        "mrr": 0.2
+        "recall": 1.0,
+        "precision": 0.4,
+        "mrr": 0.5
       },
       {
         "id": "mh_016",
         "category": "multi_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.2
       },
       {
         "id": "mh_017",
@@ -1568,7 +1568,7 @@
         "hit": 1.0,
         "recall": 0.5,
         "precision": 0.2,
-        "mrr": 0.5
+        "mrr": 0.3333333333333333
       },
       {
         "id": "mh_020",
@@ -1600,7 +1600,7 @@
         "hit": 1.0,
         "recall": 0.5,
         "precision": 0.2,
-        "mrr": 0.3333333333333333
+        "mrr": 1.0
       },
       {
         "id": "mh_024",
@@ -1608,7 +1608,7 @@
         "hit": 1.0,
         "recall": 0.3333333333333333,
         "precision": 0.2,
-        "mrr": 0.5
+        "mrr": 1.0
       },
       {
         "id": "mh_025",
@@ -1622,25 +1622,25 @@
     "by_category": {
       "single_hop": {
         "n": 40,
-        "hit_rate": 0.725,
-        "recall": 0.7,
-        "precision": 0.15,
-        "mrr": 0.5525
+        "hit_rate": 0.825,
+        "recall": 0.8125,
+        "precision": 0.175,
+        "mrr": 0.6283333333333333
       },
       "multi_hop": {
         "n": 25,
-        "hit_rate": 0.92,
-        "recall": 0.58,
-        "precision": 0.256,
-        "mrr": 0.7466666666666667
+        "hit_rate": 0.96,
+        "recall": 0.6133333333333334,
+        "precision": 0.272,
+        "mrr": 0.7946666666666666
       }
     },
     "overall": {
       "n": 65,
-      "hit_rate": 0.8,
-      "recall": 0.6538461538461539,
-      "precision": 0.19076923076923077,
-      "mrr": 0.6271794871794871
+      "hit_rate": 0.8769230769230769,
+      "recall": 0.735897435897436,
+      "precision": 0.2123076923076923,
+      "mrr": 0.6923076923076923
     }
   },
   "hybrid_alpha_0.5": {
@@ -1684,7 +1684,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_006",
@@ -1724,7 +1724,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.3333333333333333
       },
       {
         "id": "mh_001",
@@ -1746,8 +1746,8 @@
         "id": "mh_003",
         "category": "multi_hop",
         "hit": 1.0,
-        "recall": 0.5,
-        "precision": 0.2,
+        "recall": 1.0,
+        "precision": 0.4,
         "mrr": 1.0
       },
       {
@@ -1812,7 +1812,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.2
+        "mrr": 0.5
       },
       {
         "id": "sh_018",
@@ -1916,7 +1916,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.2
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_026",
@@ -2017,18 +2017,18 @@
       {
         "id": "sh_032",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_033",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_034",
@@ -2084,7 +2084,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.4,
-        "mrr": 0.25
+        "mrr": 0.5
       },
       {
         "id": "mh_016",
@@ -2148,7 +2148,7 @@
         "hit": 1.0,
         "recall": 0.5,
         "precision": 0.2,
-        "mrr": 0.3333333333333333
+        "mrr": 1.0
       },
       {
         "id": "mh_024",
@@ -2156,39 +2156,39 @@
         "hit": 1.0,
         "recall": 0.3333333333333333,
         "precision": 0.2,
-        "mrr": 0.5
+        "mrr": 1.0
       },
       {
         "id": "mh_025",
         "category": "multi_hop",
         "hit": 1.0,
-        "recall": 0.6666666666666666,
-        "precision": 0.4,
-        "mrr": 0.5
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
       }
     ],
     "by_category": {
       "single_hop": {
         "n": 40,
-        "hit_rate": 0.7,
-        "recall": 0.6875,
-        "precision": 0.15,
-        "mrr": 0.5433333333333333
+        "hit_rate": 0.75,
+        "recall": 0.7375,
+        "precision": 0.16,
+        "mrr": 0.58125
       },
       "multi_hop": {
         "n": 25,
         "hit_rate": 0.88,
-        "recall": 0.5733333333333334,
+        "recall": 0.58,
         "precision": 0.256,
-        "mrr": 0.7366666666666667
+        "mrr": 0.7766666666666667
       }
     },
     "overall": {
       "n": 65,
-      "hit_rate": 0.7692307692307693,
-      "recall": 0.6435897435897436,
-      "precision": 0.19076923076923077,
-      "mrr": 0.6176923076923077
+      "hit_rate": 0.8,
+      "recall": 0.676923076923077,
+      "precision": 0.19692307692307692,
+      "mrr": 0.6564102564102564
     }
   },
   "hybrid_alpha_0.3": {
@@ -2208,7 +2208,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 1.0
+        "mrr": 0.5
       },
       {
         "id": "sh_003",
@@ -2232,7 +2232,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.3333333333333333
+        "mrr": 0.5
       },
       {
         "id": "sh_006",
@@ -2264,7 +2264,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.2
       },
       {
         "id": "sh_010",
@@ -2357,10 +2357,10 @@
       {
         "id": "sh_017",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_018",
@@ -2464,7 +2464,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.2
+        "mrr": 0.25
       },
       {
         "id": "sh_026",
@@ -2504,7 +2504,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.25
+        "mrr": 0.3333333333333333
       },
       {
         "id": "mh_010",
@@ -2525,10 +2525,10 @@
       {
         "id": "mh_012",
         "category": "multi_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 0.3333333333333333,
+        "precision": 0.2,
+        "mrr": 0.2
       },
       {
         "id": "mh_013",
@@ -2565,18 +2565,18 @@
       {
         "id": "sh_032",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_033",
         "category": "single_hop",
-        "hit": 0.0,
-        "recall": 0.0,
-        "precision": 0.0,
-        "mrr": 0.0
+        "hit": 1.0,
+        "recall": 1.0,
+        "precision": 0.2,
+        "mrr": 0.3333333333333333
       },
       {
         "id": "sh_034",
@@ -2624,7 +2624,7 @@
         "hit": 1.0,
         "recall": 1.0,
         "precision": 0.2,
-        "mrr": 0.3333333333333333
+        "mrr": 0.5
       },
       {
         "id": "sh_040",
@@ -2696,7 +2696,7 @@
         "hit": 1.0,
         "recall": 0.5,
         "precision": 0.2,
-        "mrr": 0.3333333333333333
+        "mrr": 1.0
       },
       {
         "id": "mh_024",
@@ -2704,7 +2704,7 @@
         "hit": 1.0,
         "recall": 0.3333333333333333,
         "precision": 0.2,
-        "mrr": 0.5
+        "mrr": 1.0
       },
       {
         "id": "mh_025",
@@ -2718,25 +2718,25 @@
     "by_category": {
       "single_hop": {
         "n": 40,
-        "hit_rate": 0.7,
-        "recall": 0.6875,
-        "precision": 0.15,
-        "mrr": 0.5508333333333334
+        "hit_rate": 0.775,
+        "recall": 0.7625,
+        "precision": 0.165,
+        "mrr": 0.57375
       },
       "multi_hop": {
         "n": 25,
-        "hit_rate": 0.88,
-        "recall": 0.5933333333333334,
-        "precision": 0.264,
-        "mrr": 0.71
+        "hit_rate": 0.92,
+        "recall": 0.6066666666666667,
+        "precision": 0.272,
+        "mrr": 0.7646666666666667
       }
     },
     "overall": {
       "n": 65,
-      "hit_rate": 0.7692307692307693,
-      "recall": 0.6512820512820513,
-      "precision": 0.19384615384615386,
-      "mrr": 0.612051282051282
+      "hit_rate": 0.8307692307692308,
+      "recall": 0.7025641025641025,
+      "precision": 0.20615384615384616,
+      "mrr": 0.6471794871794873
     }
   }
 }

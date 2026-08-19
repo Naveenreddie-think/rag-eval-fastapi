@@ -16,9 +16,17 @@ data/processed/*
 !data/processed/ablation_results.json
 !data/processed/full_ablation_matrix.json
 !data/processed/reranker_finetune_results.json
+# chunks.json is required at container/Space boot (BM25 index) -- without it
+# tracked, a fresh clone builds a container that boots in degraded mode
+# (see app/api/main.py's lifespan hook). Small (~1MB), safe to track plainly.
+!data/processed/chunks.json
 
-# Model checkpoints
-models/
+# Model checkpoints -- except the fine-tuned reranker, which IS tracked (via
+# Git LFS for the large weight file, see .gitattributes) since it's now
+# actually loaded by app/retrieval/hybrid.py at runtime, not just an eval
+# artifact.
+models/*
+!models/fastapi-reranker-minilm/
 checkpoints/
 
 .pytest_cache/

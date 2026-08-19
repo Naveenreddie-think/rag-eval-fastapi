@@ -445,6 +445,22 @@ To resolve the vocabulary-clustering bias diagnosed in Step 3/5 where off-the-sh
 
 **Empirical Conclusion**: Domain-specific fine-tuning with hard negative mining significantly outperformed off-the-shelf models, lifting MRR from 0.624 to 0.739 and Hit Rate@5 from 0.769 to 0.877.
 
+**End-to-End Effect (wired into `app/retrieval/hybrid.py`, `scripts/run_retrieval_eval.py` re-run against the live pipeline)**:
+
+The table above measures the reranker in isolation (`scripts/train_reranker.py`'s own eval). After actually wiring `_get_cross_encoder()` to load `models/fastapi-reranker-minilm/` (falling back to the off-the-shelf model if that directory isn't present, e.g. on a clone without Git LFS pulled), the full retrieval eval was re-run end-to-end:
+
+| Configuration | Hit Rate@5 | Recall@5 | Precision@5 | MRR |
+|---|---|---|---|---|
+| Dense-Only (unaffected by reranker) | 0.831 | 0.692 | 0.200 | 0.584 |
+| Hybrid, $\alpha=1.0$ (pure rerank, fine-tuned) | 0.877 | 0.744 | 0.218 | **0.739** |
+| **Hybrid, $\alpha=0.7$ (current serving default, fine-tuned)** | **0.877** | **0.736** | **0.212** | **0.692** |
+| Hybrid, $\alpha=0.5$ (fine-tuned) | 0.800 | 0.677 | 0.197 | 0.656 |
+| Hybrid, $\alpha=0.3$ (fine-tuned) | 0.831 | 0.703 | 0.206 | 0.647 |
+
+At the project's current default ($\alpha=0.7$), the real end-to-end MRR moved from 0.627 (off-the-shelf reranker, original Step 5 table) to **0.692** -- a genuine improvement in what the API actually serves, not just the standalone reranker eval.
+
+**New honest observation**: with the *fine-tuned* reranker in the loop, $\alpha=1.0$ (pure rerank, no RRF blending) now slightly beats the $\alpha=0.7$ default on MRR (0.739 vs 0.692). Blending was originally introduced (Step 5) to correct for the off-the-shelf reranker's MS-MARCO vocabulary bias; a reranker fine-tuned on this exact corpus's hard negatives may not need that correction as much. This project has not re-swept $\alpha$ against the fine-tuned reranker to confirm whether $\alpha=1.0$ is robustly better or a one-run artifact -- $\alpha=0.7$ remains the default pending that follow-up, not because it's still been shown to be optimal.
+
 ---
 
 ## Honest Limitations

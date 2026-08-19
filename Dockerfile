@@ -22,10 +22,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # install time -- so it's pinned to the exact nightly build verified
 # working on this project, installed from PyTorch's own nightly index.
 #
-# NOTE: Installs the latest cu128 nightly build dynamically from PyTorch's
-# index without pinning an ephemeral daily datestamp that gets pruned.
+# NOTE: PyTorch prunes older nightly wheels from this index over time.
+# Checked directly against the index before pinning (not guessed): as of
+# this build, 2.12.0.dev20260408+cu128 is the ONLY cu128 nightly currently
+# listed for cp312/manylinux -- there is no newer one to pin instead. If
+# this exact version 404s on a future build, check
+# https://download.pytorch.org/whl/nightly/cu128/torch/ for what's
+# actually available, update the pin, and re-verify
+# `torch.cuda.is_available()` before trusting it -- do not silently fall
+# back to a stable release or leave this unpinned.
 RUN pip install --no-cache-dir --pre \
-    torch \
+    torch==2.12.0.dev20260408+cu128 \
     --index-url https://download.pytorch.org/whl/nightly/cu128
 
 # Everything else from the normal index. torch is already satisfied above
@@ -39,6 +46,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ app/
 COPY data/processed/ data/processed/
 COPY streamlit_app.py .
+# Fine-tuned reranker (Step 8) -- app/retrieval/hybrid.py falls back to the
+# off-the-shelf model if this directory isn't present, so a build context
+# without Git LFS objects pulled still works, just without the domain
+# adaptation gain.
+COPY models/fastapi-reranker-minilm/ models/fastapi-reranker-minilm/
 
 EXPOSE 8000
 EXPOSE 8501
