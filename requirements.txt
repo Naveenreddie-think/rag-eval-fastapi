@@ -19,6 +19,11 @@ sentence-transformers  # cross-encoder reranker
 # explicit step in the Dockerfile; for local (non-Docker) setup, install it
 # the same way -- see the Dockerfile's torch RUN step for the exact command.
 transformers==5.5.0
+# local_llm.py loads the model with device_map="cuda", which transformers
+# requires `accelerate` for. Missing here entirely until a clean Docker
+# build surfaced it -- locally masked because some other package pulled it
+# in transitively (see FINDINGS.md Bugs Found & Fixed).
+accelerate==1.14.0
 
 # Step 4/5 -- evaluation
 ragas

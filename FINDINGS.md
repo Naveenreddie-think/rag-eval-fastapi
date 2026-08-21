@@ -508,3 +508,7 @@ depends on this being consistent -- worth remembering why `as\\\\\\\\\\\\\\\\\\\
 
 is there, not just that it is.
 
+**Bug 4 -- `accelerate` missing from `requirements.txt`, only surfaced in a clean container build.**
+
+`app/generation/local_llm.py` loads Qwen2.5-3B-Instruct with `device_map="cuda"`, which `transformers` requires the `accelerate` package for -- but `accelerate` was never listed in `requirements.txt`. Every query on the native dev machine worked anyway, because `accelerate` happened to already be installed there as a side effect of unrelated packages, silently masking the gap. It only surfaced when a clean Docker image, built strictly from `requirements.txt`, hit its first real `/api/query` call and failed with `HTTP 500: ... requires accelerate. You can install it with pip install accelerate`. Same failure pattern as the earlier `torch`/`transformers` gap: a dependency a module imports directly but that isn't declared, masked locally by whatever else happened to pull it in transitively. Fixed by adding `accelerate==1.14.0` (the exact version already verified working) to `requirements.txt`, rebuilding with `--no-cache`, and re-running the same query end-to-end in a fresh container to confirm a real `HTTP 200` with a generated answer, not just that the container started.
+
