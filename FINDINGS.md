@@ -512,3 +512,18 @@ is there, not just that it is.
 
 `app/generation/local_llm.py` loads Qwen2.5-3B-Instruct with `device_map="cuda"`, which `transformers` requires the `accelerate` package for -- but `accelerate` was never listed in `requirements.txt`. Every query on the native dev machine worked anyway, because `accelerate` happened to already be installed there as a side effect of unrelated packages, silently masking the gap. It only surfaced when a clean Docker image, built strictly from `requirements.txt`, hit its first real `/api/query` call and failed with `HTTP 500: ... requires accelerate. You can install it with pip install accelerate`. Same failure pattern as the earlier `torch`/`transformers` gap: a dependency a module imports directly but that isn't declared, masked locally by whatever else happened to pull it in transitively. Fixed by adding `accelerate==1.14.0` (the exact version already verified working) to `requirements.txt`, rebuilding with `--no-cache`, and re-running the same query end-to-end in a fresh container to confirm a real `HTTP 200` with a generated answer, not just that the container started.
 
+**Bug 5 -- no persistent storage for the HuggingFace model cache, making every fresh container unusably slow.**
+
+`docker-compose.yml`'s `api` service originally mounted only `data/processed/` -- nothing persisted `/root/.cache/huggingface`. Every fresh container (first boot, or a restart that recreates the container rather than just stopping/starting it) re-downloaded Qwen2.5-3B, BGE-M3, and the reranker's dependencies from HF Hub from scratch on the first query. Measured directly, not estimated: first real query against a container with an empty cache took **`dense_search_ms: 1,018,515` (~17.0 min), `generation_ms: 2,151,150` (~35.9 min), `total_pipeline_ms: 3,177,398` (~53.0 min)**, `real 68m54.744s` wall-clock via `time curl`. That's not viable for any real deployment -- a host sleeping/waking or a container restart would silently reintroduce a ~1-hour-long first request every time.
+
+Fixed by adding a named volume (`hf_cache:/root/.cache/huggingface`) to the `api` service in `docker-compose.yml`. Verified the fix actually works, not just that the config looks right: ran the identical query cold (empty volume, numbers above), then `docker compose stop` (preserves the volume, unlike `down`) followed by `docker compose start`, confirmed via `docker exec ... du -sh /root/.cache/huggingface` that the volume still held 11GB after the restart, then ran the exact same query again:
+
+| Metric | Cold (empty volume) | Warm (restart, populated volume) | Speedup |
+|---|---|---|---|
+| `dense_search_ms` | 1,018,515 | 23,763 | ~42.9x |
+| `generation_ms` | 2,151,150 | 135,420 | ~15.9x |
+| `total_pipeline_ms` | 3,177,398 | 160,442 | ~19.8x |
+| wall-clock (`time curl`) | 68m54.744s | 2m40.629s | ~25.8x |
+
+Both runs returned the identical answer (a correct refusal -- the specific chunk needed wasn't in top-5 for this query), confirming the volume only changed load time, not model behavior. The volume is only mounted for `api`, not `ui`, per the current fix's scope -- `ui` would still cold-load on every restart if used standalone.
+

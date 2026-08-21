@@ -15,6 +15,12 @@ services:
       - .env
     volumes:
       - ./data/processed:/app/data/processed
+      # Persist downloaded model weights (Qwen2.5-3B, BGE-M3, cross-encoder)
+      # across container restarts -- without this, every fresh container
+      # re-downloads several GB from HF Hub on its first query (~35 min
+      # cold, see FINDINGS.md). `docker compose stop`/`start` keeps this
+      # volume; `docker compose down -v` removes it.
+      - hf_cache:/root/.cache/huggingface
     deploy:
       resources:
         reservations:
@@ -41,3 +47,6 @@ services:
               capabilities: [gpu]
     depends_on:
       - api
+
+volumes:
+  hf_cache:
