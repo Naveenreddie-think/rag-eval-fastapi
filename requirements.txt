@@ -1,5 +1,6 @@
 # Step 1 -- ingestion
-requests
+# requests was never actually imported anywhere in this project (confirmed
+# via grep across all .py files) -- removed rather than left as dead weight.
 python-dotenv
 
 # Step 2 -- embeddings + vector store
@@ -26,7 +27,30 @@ transformers==5.5.0
 accelerate==1.14.0
 
 # Step 4/5 -- evaluation
-ragas
+# Deliberately pinned, not an oversight: leaving this unpinned resolves to
+# ragas 0.4.3 in a clean install, which has a hard import-time crash --
+# `from ragas.llms.base import BaseRagasLLM` (used directly by
+# app/eval/ragas_llm.py) raises ModuleNotFoundError on
+# langchain_community.chat_models.vertexai, confirmed reproducible inside
+# a real container build, not just locally. app/eval/ragas_llm.py's
+# LocalQwenRagasLLM is also written specifically against 0.1.21's
+# BaseRagasLLM interface (generate_text/agenerate_text abstract methods,
+# confirmed present in 0.1.21 and unreachable at all in 0.4.3 due to the
+# crash above). Do not bump this without re-verifying
+# scripts/run_ragas_comparison.py actually runs end-to-end, not just that
+# ragas imports cleanly.
+ragas==0.1.21
+
+# Resolved by `pip show` inside a container built with the ragas==0.1.21
+# pin above (NOT against 0.4.3, which never actually installs cleanly --
+# see the comment above). Pinning explicitly rather than trusting pip's
+# resolver to reproduce the same versions on a future install, since
+# ragas==0.1.21's own transitive dependency ranges are wide enough to
+# drift over time.
+pydantic==2.13.4
+langchain-core==0.2.43
+datasets==5.0.1
+numpy==1.26.4
 
 # Step 7 -- serving
 # fastapi/starlette/streamlit pinned together: the old fastapi 0.115.0 was
