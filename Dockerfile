@@ -55,9 +55,15 @@ COPY models/fastapi-reranker-minilm/ models/fastapi-reranker-minilm/
 EXPOSE 8000
 EXPOSE 8501
 
-# No curl in this slim image -- use Python's stdlib for the healthcheck
-# instead of adding a package just for this.
+# Entrypoint Design:
+# - Default CMD launches Streamlit on port 8501 to support direct single-container
+#   deployments (specifically Hugging Face Spaces with Docker SDK, which runs the
+#   image's default CMD without a runtime command-override mechanism and routes
+#   traffic to README.md's app_port: 8501).
+# - Local multi-service development is managed via docker-compose.yml, which explicitly
+#   overrides `command:` for both the FastAPI backend (`api` on port 8000) and the
+#   Streamlit frontend (`ui` on port 8501).
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health', timeout=3)" || exit 1
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health', timeout=3)" || exit 1
 
-CMD ["python", "-m", "app.api.main"]
+CMD ["python", "-m", "streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]

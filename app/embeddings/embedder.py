@@ -1,18 +1,8 @@
 """
-Step 2: Embedding.
+Dense Embedding Module.
 
-Wraps BAAI/bge-m3 (free, open-weight, MIT license) behind a single
-embed(texts) -> list[vector] interface, so the rest of the pipeline
-doesn't care which model is behind it -- needed for Step 5's
-embedding-model sweep (a second backend gets added there, not here).
-
-Chosen: BGE-M3, dense embeddings only (its own sparse/multi-vector modes
-are intentionally unused -- BM25 sparse retrieval is built separately in
-Step 3, so this isn't an oversight, it's a deliberate scope split).
-Rejected: Qwen3-Embedding-8B (best MTEB score, but 8B params -- too heavy
-for iterative local development on CPU). Rejected: OpenAI
-text-embedding-3-small (strong and cheap, but paid -- kept as the Step 5
-sweep's second backend instead of the free default).
+Wraps BAAI/bge-m3 dense embeddings (1024-dimensional) with L2 normalization,
+providing a unified interface for embedding documents and queries.
 """
 
 from sentence_transformers import SentenceTransformer

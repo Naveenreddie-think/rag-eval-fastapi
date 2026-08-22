@@ -476,37 +476,9 @@ At the project's current default ($\alpha=0.7$), the real end-to-end MRR moved f
 
 ## Bugs Found \& Fixed
 
-\*\*Bug 3 -- cross-platform path separator mismatch.\*\*
+**Bug 3 -- cross-platform path separator mismatch.**
 
-`load\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_local\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_docs()` used `str(md\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_path.relative\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_to(docs\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_root))` to build
-
-each chunk's `source\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_path`. On Linux this produces forward slashes
-
-(`tutorial/metadata.md`); on Windows, `pathlib` produces backslashes
-
-(`tutorial\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\metadata.md`). Tests that only checked non-emptiness or counts
-
-passed on both platforms; tests that matched an exact source\_path string
-
-failed only on Windows (`StopIteration` from `next()` finding no match).
-
-Caught immediately by running the same test suite on Windows after it had
-
-already passed on the dev machine used to build Step 1 -- exactly the
-
-kind of platform-specific bug Project 1's `sys.executable` note existed
-
-to pre-empt, and this one slipped through anyway. Fixed by replacing
-
-`str(path.relative\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_to(root))` with `path.relative\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_to(root).as\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_posix()`,
-
-which forces forward slashes regardless of OS. Any future code that
-
-stores or compares `source\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_path` (the eval set in Step 4 especially)
-
-depends on this being consistent -- worth remembering why `as\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_posix()`
-
-is there, not just that it is.
+`load_local_docs()` used `str(md_path.relative_to(docs_root))` to build each chunk's `source_path`. On Linux this produces forward slashes (`tutorial/metadata.md`); on Windows, `pathlib` produces backslashes (`tutorial\metadata.md`). Tests that only checked non-emptiness or counts passed on both platforms; tests that matched an exact `source_path` string failed on Windows (`StopIteration` from `next()` finding no match). Caught by running the test suite on Windows after it had passed on Linux. Fixed by replacing `str(path.relative_to(root))` with `path.relative_to(root).as_posix()`, which forces forward slashes regardless of OS.
 
 **Bug 4 -- `accelerate` missing from `requirements.txt`, only surfaced in a clean container build.**
 
@@ -526,4 +498,17 @@ Fixed by adding a named volume (`hf_cache:/root/.cache/huggingface`) to the `api
 | wall-clock (`time curl`) | 68m54.744s | 2m40.629s | ~25.8x |
 
 Both runs returned the identical answer (a correct refusal -- the specific chunk needed wasn't in top-5 for this query), confirming the volume only changed load time, not model behavior. The volume is only mounted for `api`, not `ui`, per the current fix's scope -- `ui` would still cold-load on every restart if used standalone.
+
+**Bug 6 -- Inconclusive containerized RAGAS verification run (unbuffered output & high CPU loop).**
+
+An attempt was made to run `scripts/run_ragas_comparison.py` inside the containerized Docker environment to verify execution parity with the native host environment. The process executed for over 13 hours under the following profile:
+- Sustained ~90-100% CPU core utilization continuously throughout the entire window.
+- 0% GPU duty cycle across multiple spot samples over a 28-second window near the end (despite VRAM remaining allocated at ~7.7GB).
+- Zero external network calls (confirming no remote API or external database leakage).
+- Zero progress logs emitted across the 13+ hours (caused by standard Python stdout buffering and RAGAS's internal `tqdm` progress bar not flushing to non-TTY piped Docker logs).
+
+Because the container lacked deep diagnostic tooling (`strace`, `py-spy`, `ps`) in the slim image to definitively distinguish between expensive CPU-bound retry/parsing loops vs. an unproductive stuck state, and because full empirical results already existed from the native run, the process was decisively killed via `docker compose down` rather than burning open-ended debugging time.
+
+**Canonical Decision**: The verified native evaluation results (documented above with an average faithfulness of 0.908 / 0.884 and 4/65 parser failures) stand as the canonical documented RAGAS comparison benchmark.
+
 

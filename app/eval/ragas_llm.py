@@ -1,11 +1,8 @@
 """
-Step 5: Local Qwen wrapper for RAGAS's LLM interface.
+Local LLM Adapter for RAGAS Evaluation Framework.
 
-RAGAS (0.1.21, the version confirmed to install cleanly for this
-project) defaults to OpenAI via langchain wrappers. This implements
-RAGAS's minimal BaseRagasLLM interface directly against our own local
-model, avoiding the dependency conflict entirely by not routing through
-langchain's model integrations at all.
+Implements RAGAS's BaseRagasLLM interface using the local Qwen2.5-3B-Instruct model,
+enabling offline, reproducible RAGAS evaluation without third-party API dependencies.
 """
 
 from langchain_core.outputs import Generation, LLMResult

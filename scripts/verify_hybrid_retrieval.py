@@ -1,9 +1,11 @@
 """
-Step 3 verification: compare dense-only vs. hybrid+rerank on queries
-where keyword matching should plausibly help -- including query 3 from
-Step 2, which came back weaker on dense-only retrieval.
+Verification Script: Hybrid Retrieval & Reranking.
 
-Run with: python -m scripts.verify_hybrid_retrieval
+Compares Dense-only vs. Hybrid + Cross-Encoder reranking across test queries,
+profiling latency per pipeline stage.
+
+Run with:
+    python -m scripts.verify_hybrid_retrieval
 """
 
 import json

@@ -1,13 +1,8 @@
 """
-Step 2/3: Dense retrieval.
+Dense Retrieval Module.
 
-Stands up the vector store (Qdrant Cloud, free tier) and provides
-dense semantic search over embedded chunks.
-
-Collection uses cosine distance since BGE-M3 embeddings are
-L2-normalized (embed() calls normalize_embeddings=True) -- cosine
-similarity on normalized vectors is equivalent to dot product, and
-Qdrant's COSINE distance metric handles this directly.
+Interfaces with Qdrant Cloud to index BGE-M3 embeddings and execute cosine-similarity
+nearest-neighbor semantic search over documentation chunks.
 """
 
 import os

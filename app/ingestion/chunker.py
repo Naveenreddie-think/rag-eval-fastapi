@@ -1,27 +1,12 @@
 """
-Step 1: Chunking.
+Structure-Aware Document Chunking Module.
 
-Provisional default (per plan): structure-aware, split on markdown
-headers. NOT justified yet -- chunk size/strategy gets swept for real in
-Step 5 against the eval set, not decided here. chunk_fixed_size() exists
-purely to produce the "naive baseline" for that later comparison.
-
-Each chunk keeps its full header path as metadata (e.g.
-"Metadata and Docs URLs > Metadata for API"), AND the real anchor slug
-of its deepest header (e.g. "metadata-for-api"), captured directly from
-source rather than derived by slugifying header text. This matters:
-verified that some headers contain embedded HTML/markdown formatting
-(e.g. '## Data <dfn title="...">conversion</dfn> { #data-conversion }')
-where a naive slugify of the visible header text would NOT reliably
-reproduce the real anchor -- so Step 4's QA pairs (which reference
-chunks as "file.md#anchor-slug") can only be matched exactly by
-capturing the real anchor, not guessing it.
-
-Fence-tracking detail: chunk_by_headers() tracks whether it's inside a
-fenced code block (``` ... ```) and never treats a line as a header while
-inside one. Without this, a Python comment inside a code sample --
-`# a heading-looking comment` -- would get misread as a markdown header
-and incorrectly split the chunk mid-code-block.
+Provides:
+1. `chunk_by_headers`: Structure-aware markdown chunking that splits on heading boundaries
+   (# through ######) while strictly protecting fenced code blocks (``` ... ```) from
+   mid-block splits (e.g. comments starting with `#`). Captures full hierarchical header paths
+   and extracts explicit `{ #anchor }` slugs directly from source.
+2. `chunk_fixed_size`: Fixed-size sliding-window chunking used as a baseline for ablation sweeps.
 """
 
 import re

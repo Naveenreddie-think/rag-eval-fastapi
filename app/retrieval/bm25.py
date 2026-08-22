@@ -1,14 +1,8 @@
-
 """
-Step 3: Sparse (keyword) retrieval.
+Sparse (Keyword) Retrieval Module.
 
-BM25 index over the same chunks used for dense retrieval, for exact-match
-strength embeddings are weak on (function names, exact terms, IDs).
-
-Chunk "id" here matches the same enumerate-index convention used as the
-Qdrant point ID in dense.py -- both retrievers must operate over the
-identical, identically-ordered chunk list for hybrid.py's fusion step to
-correctly match results by id.
+Provides BM25Okapi indexing over document chunks. Chunk IDs align directly with
+Qdrant point IDs to allow reciprocal rank fusion (RRF) across sparse and dense retrievers.
 """
 
 import re

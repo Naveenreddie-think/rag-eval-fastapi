@@ -1,16 +1,9 @@
 """
-Generation.
+Grounded Generation Module.
 
-Takes retrieved chunks + a user query, generates an answer via the
-local Qwen2.5-3B-Instruct model (app/generation/local_llm.py),
-constrained to answer ONLY from retrieved context, with an explicit
-"not enough information" fallback -- this fallback behavior is itself
-what the no_answer QA category tests (refusal vs hallucination).
-
-Switched from Claude API to a local model when Anthropic API credits
-ran out and the decision was made not to renew -- verified via
-scripts/verify_local_llm.py that Qwen2.5-3B-Instruct correctly exhibits
-the refusal behavior before wiring it in here.
+Generates answers using the local Qwen2.5-3B-Instruct model (app/generation/local_llm.py)
+constrained to retrieved context chunks, with an explicit refusal constraint for unanswerable
+or out-of-domain queries.
 """
 
 from app.generation.local_llm import generate as llm_generate

@@ -1,31 +1,17 @@
 """
-Step 3/5: Hybrid retrieval + reranking.
+Hybrid Retrieval & Cross-Encoder Reranking Module.
 
-Fuses dense + BM25 results via Reciprocal Rank Fusion (RRF), then
-reranks with a cross-encoder -- BUT blends the cross-encoder score with
-the RRF score rather than letting the cross-encoder fully override it.
-
-Why blending was added (real, evidenced bug, not a hypothetical):
-diagnosing Step 5's retrieval eval showed the cross-encoder
-(ms-marco-MiniLM-L-6-v2, trained on MS MARCO web-search passages)
-sometimes demotes the actual answer-bearing chunk below chunks that
-merely share surface vocabulary with the query's header/theme -- e.g.
-demoting a chunk RRF had ranked #1 down to rank #9, in favor of a
-chunk titled "HTTPX" that only mentions the query's subject in passing.
-Since RRF fusion (which combines two different, real signals -- dense
-semantic similarity and BM25 exact-term matching) already ranked the
-correct chunk highly in that case, letting the cross-encoder fully
-override it discards a real signal. Blending preserves most of the RRF
-signal while still incorporating the cross-encoder's benefit where the
-two agree.
-
-RRF chosen over a weighted score combination for the FIRST fusion stage
-because dense (cosine similarity, ~0-1) and BM25 (unbounded,
-corpus-dependent) scores aren't on comparable scales -- RRF sidesteps
-that by using rank position only. For the SECOND blend (RRF vs.
-cross-encoder), both signals are min-max normalized within the
-candidate pool before blending, since RRF scores and cross-encoder
-logits are on very different, non-comparable scales too.
+Pipeline:
+1. Candidate Retrieval: Queries dense (BGE-M3) and sparse (BM25) retrievers for a pool of candidates.
+2. First-Stage Fusion (RRF): Combines dense and sparse candidate rankings via Reciprocal Rank
+   Fusion (k=60). RRF operates purely on rank position, avoiding scale-calibration discrepancies
+   between cosine similarities and unbounded BM25 scores.
+3. Second-Stage Reranking & Score Blending: Min-max normalizes both the RRF score and the
+   CrossEncoder logit across the candidate pool, blending them via:
+     final_score = blend_alpha * norm_ce + (1 - blend_alpha) * norm_rrf
+   Blending prevents the CrossEncoder from discarding dense+BM25 consensus when surface
+   vocabulary bias or header matching in off-the-shelf models would otherwise demote
+   canonical technical answers.
 """
 
 import os

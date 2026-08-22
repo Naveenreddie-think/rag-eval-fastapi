@@ -1,11 +1,12 @@
 """
-Step 5: RAGAS faithfulness vs. our custom faithfulness metric, run side
-by side on the SAME generated answers (reuses data/processed/
-generation_eval_results.json -- does not regenerate answers, only
-re-fetches the retrieved context per question, which is fast/free
-locally + one Qdrant call) so the comparison is apples-to-apples.
+Comparative Benchmark Runner: RAGAS Framework vs. Custom Explainable Faithfulness.
 
-Run with: python -m scripts.run_ragas_comparison
+Runs RAGAS faithfulness scoring side-by-side on the generated answers recorded in
+data/processed/generation_eval_results.json, enabling a direct methodology comparison
+against our atomic claim decomposition metric.
+
+Run with:
+    python -m scripts.run_ragas_comparison
 """
 
 import json
@@ -41,14 +42,14 @@ def main() -> None:
             "custom_faithfulness_score": r["faithfulness_score"],
         })
 
-    print(f"Scoring {len(rows)} pairs with RAGAS faithfulness...")
+    print(f"Scoring {len(rows)} pairs with RAGAS faithfulness...", flush=True)
 
     dataset = Dataset.from_list([
         {"question": r["question"], "answer": r["answer"], "contexts": r["contexts"]}
         for r in rows
     ])
 
-    print("Using LocalQwenRagasLLM (Local Qwen2.5-3B-Instruct)")
+    print("Using LocalQwenRagasLLM (Local Qwen2.5-3B-Instruct)", flush=True)
     faithfulness.llm = LocalQwenRagasLLM()
 
     result = evaluate(dataset, metrics=[faithfulness])
@@ -59,7 +60,7 @@ def main() -> None:
     if parse_failures:
         print(f"\nNote: RAGAS itself failed to parse its own LLM output on "
               f"{parse_failures}/{len(ragas_scores)} pairs (returned None/NaN) -- "
-              f"excluded from the averaged comparison below, not treated as 0.")
+              f"excluded from the averaged comparison below, not treated as 0.", flush=True)
 
     def _is_missing(x):
         return x is None or (isinstance(x, float) and x != x)
@@ -78,19 +79,19 @@ def main() -> None:
     valid_ragas = [c["ragas_faithfulness_score"] for c in comparison if c["ragas_faithfulness_score"] is not None]
     avg_ragas = sum(valid_ragas) / len(valid_ragas) if valid_ragas else 0.0
 
-    print(f"\nAverage custom faithfulness: {avg_custom:.3f}")
-    print(f"Average RAGAS faithfulness:  {avg_ragas:.3f}")
+    print(f"\nAverage custom faithfulness: {avg_custom:.3f}", flush=True)
+    print(f"Average RAGAS faithfulness:  {avg_ragas:.3f}", flush=True)
 
     biggest_diffs = sorted([c for c in comparison if c["diff"] is not None],
                             key=lambda c: c["diff"], reverse=True)[:5]
-    print("\nBiggest disagreements (custom vs RAGAS):")
+    print("\nBiggest disagreements (custom vs RAGAS):", flush=True)
     for c in biggest_diffs:
         print(f"  {c['id']}: custom={c['custom_faithfulness_score']:.2f}  "
-              f"ragas={c['ragas_faithfulness_score']:.2f}  diff={c['diff']:.2f}")
+              f"ragas={c['ragas_faithfulness_score']:.2f}  diff={c['diff']:.2f}", flush=True)
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(comparison, f, indent=2)
-    print(f"\nSaved full comparison to {OUTPUT_PATH}")
+    print(f"\nSaved full comparison to {OUTPUT_PATH}", flush=True)
 
 
 if __name__ == "__main__":

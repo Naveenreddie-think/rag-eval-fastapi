@@ -1,12 +1,10 @@
 """
-Step 5: Custom faithfulness/groundedness metric.
+Explainable Faithfulness & Groundedness Metric.
 
-Built alongside RAGAS (not instead of it) so the metric is explainable
-rather than a black box: decompose the generated answer into atomic
-factual claims, then check each claim against the retrieved context.
-faithfulness_score = (# claims supported by context) / (# total claims),
-computed in code from real per-claim judgments -- never asking the model
-to self-report the aggregate score directly.
+Evaluates generation faithfulness through transparent atomic claim decomposition:
+1. Decomposes generated answers into atomic, independently checkable factual statements.
+2. Checks each claim against retrieved context chunks using strict binary support prompts.
+3. Computes aggregate faithfulness: supported_claims / total_claims directly in code.
 """
 
 import re
@@ -17,31 +15,18 @@ CORE_REFUSAL_MARKER = "don't have enough information in the provided context"
 
 
 def is_refusal_response(answer: str) -> bool:
-    """Direct check for whether the model actually refused, independent
-    of claim decomposition.
-
-    Matches a stable CORE phrase fragment rather than the full exact
-    sentence -- Qwen2.5-3B was observed paraphrasing slightly
-    ("...to answer this question." instead of the exact "...to answer
-    this."), which is obviously still a refusal but failed a strict
-    exact-substring check, causing 5 genuine refusals in the no_answer
-    eval to be misclassified as hallucinations. This was a bug in our
-    own measurement, not a model failure."""
+    """Check if the answer is a model refusal.
+    
+    Matches against a stable core phrase marker rather than strict full-sentence equality
+    to remain robust to slight phrasing variations while reliably identifying refusals.
+    """
     return CORE_REFUSAL_MARKER in answer.lower()
 
 def decompose_claims(answer: str) -> list[str]:
-    """Break an answer into a list of atomic, independently-checkable
-    factual claims. Returns a plain list of claim strings.
-
-    IMPORTANT: only call this on answers already confirmed NOT to be a
-    refusal (see custom_faithfulness_score, which checks
-    is_refusal_response() first). Earlier versions asked the model to
-    also decide "is this a refusal, respond NONE" as part of this same
-    call -- that was unreliable and got LESS stable with more
-    disambiguating examples added. Since we already have a perfectly
-    reliable, deterministic string-match check for refusals, there's no
-    reason to also ask an unreliable smaller model to redundantly
-    re-decide the same binary question."""
+    """Decompose an answer into atomic, independently-checkable factual statements.
+    
+    Must be called on answers already verified not to be refusals via is_refusal_response().
+    """
     prompt = f"""Break the following answer into atomic, independently checkable \
 factual claims, one claim per line, with no numbering or bullets. Each line \
 must be a complete, grammatically standalone sentence -- do not split a \

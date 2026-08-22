@@ -1,27 +1,14 @@
 """
-Local generation model: Qwen2.5-3B-Instruct, replacing Claude API calls
-across generator.py, faithfulness.py, and ragas_llm.py.
+Local Generation Backend: Qwen2.5-3B-Instruct.
 
-Reason for this specific choice: given available VRAM (8GB, shared with
-BGE-M3 + the cross-encoder reranker) and the GPU's bleeding-edge
-architecture (RTX 5060, Blackwell/sm_120 -- already required PyTorch
-nightly cu128 to work at all for embeddings), a 3B model at bf16
-(~6GB weights, no quantization) avoids stacking a NEW unverified
-compatibility risk (bitsandbytes on Blackwell) on top of an already
-fragile setup. Same transformers/torch stack already confirmed working,
-so this is a drop-in extension, not a new toolchain.
-
-do_sample=False (greedy decoding) is used throughout for reproducible,
-deterministic outputs -- appropriate for eval, where we want the same
-input to reliably produce the same output across re-runs.
-
-Supports an optional `prefill` string (forces the response to start with
-given text, e.g. "[") -- mirrors the assistant-message-prefill trick
-that fixed Claude's occasional "shows its work instead of returning
-JSON" behavior in faithfulness.py. With a local model we have full
-control over the prompt tokens, so this is done by directly appending
-the prefill text to the prompt before generation, rather than needing
-an API-specific prefill mechanism.
+Inference configuration:
+- Architecture & Memory: Runs at bfloat16 (~6GB weights, unquantized) within 8GB VRAM
+  alongside BGE-M3 and the CrossEncoder reranker. Running unquantized directly avoids
+  external quantization kernel dependencies on Blackwell (sm_120) architectures.
+- Determinism: `do_sample=False` (greedy decoding) ensures reproducible, deterministic
+  evaluations across runs.
+- Token Prefill: Supports explicit prompt token prefilling (e.g., forcing JSON start `[`)
+  for structured generation tasks.
 """
 
 import torch

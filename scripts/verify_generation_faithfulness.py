@@ -1,14 +1,12 @@
 """
-Step 5 pre-check: verify generation + custom faithfulness scoring work
-correctly on a small sample BEFORE running the full 80-pair eval
-(real API cost/time per pair -- cheaper to catch bugs now).
+Verification Script: Grounded Generation & Explainable Faithfulness Scoring.
 
-Includes one deliberately adversarial case: generating an answer against
-retrieved context, then scoring faithfulness against WRONG context, to
-confirm the scorer actually detects unsupported claims rather than
-rubber-stamping everything as faithful.
+Verifies end-to-end grounded generation and custom atomic claim decomposition scoring
+across sample queries, including an adversarial check (scoring against unrelated context)
+to validate unsupported claim detection.
 
-Run with: python -m scripts.verify_generation_faithfulness
+Run with:
+    python -m scripts.verify_generation_faithfulness
 """
 
 import json
