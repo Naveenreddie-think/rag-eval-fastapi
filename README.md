@@ -9,13 +9,15 @@ pinned: false
 
 # FastAPI Docs RAG Evaluation Engine
 
-A retrieval-augmented generation system built over FastAPI's real documentation, designed specifically to prove out a rigorous evaluation methodology rather than just demo a chatbot.
+A retrieval-augmented generation system built over FastAPI's real documentation, with retrieval quality, answer faithfulness, and refusal behavior all measured directly rather than assumed.
 
 ## The problem
 
-"Built a RAG chatbot with LangChain" is a common line on a resume, and it means almost nothing to an interviewer without real numbers behind it. Most RAG portfolio projects skip the actual hard questions: does retrieval find the right document, does the generated answer actually rely on what was retrieved, and does the system know when it doesn't have enough information to answer at all. Without measuring those three things directly, "it works" usually just means "it produced plausible-looking text for the few demo queries someone happened to try."
+Developers reach for an AI assistant over documentation because reading through pages of docs to find one answer is slow. But a RAG system that just retrieves *something* and generates a plausible-sounding answer is actively dangerous in a technical setting: a hallucinated code example, a wrong parameter name, or a confidently wrong answer to something the docs don't actually cover can cost more time than it saves, and erodes trust the moment it's caught.
 
-This project treats those three questions as the actual deliverable, not an afterthought. Every retrieval configuration, every reranking decision, every generation model swap is backed by a measured result against a hand-verified 80-pair evaluation set -- not eyeballed, not assumed.
+For a documentation assistant to be genuinely usable, three things have to be true, and provably so: it has to retrieve the right source material, the generated answer has to actually be grounded in what was retrieved (not just plausible-sounding), and it has to recognize when a question falls outside what the documentation covers, rather than guessing.
+
+This project builds a RAG system over FastAPI's real documentation and measures all three of those properties directly, rather than assuming they hold. Every retrieval configuration, every reranking decision, every generation model swap is backed by a measured result against a hand-verified 80-pair evaluation set.
 
 ## What this does
 
