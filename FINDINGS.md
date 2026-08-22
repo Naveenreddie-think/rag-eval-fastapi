@@ -339,7 +339,7 @@ produced:
 
 | Model / Framework | Single-Hop Faithfulness | Multi-Hop Faithfulness | No-Answer Refusal Accuracy | Parse Failure Rate | Notes |
 |---|---|---|---|---|---|
-| **Claude 3.5 Sonnet (API)** | **0.971** (40/40) | **0.914** (25/25) | **1.000** (15/15) | 0.0% | Frontier hosted baseline |
+| **Claude Sonnet 4.5 (API)** | **0.971** (40/40) | **0.914** (25/25) | **1.000** (15/15) | 0.0% | Frontier hosted baseline |
 | **Qwen2.5-3B-Instruct (Local)** | **0.769** (40/40) | **0.715** (23/25) | **1.000** (15/15) | 0.0% | Local open-weight at bf16, greedy |
 | **RAGAS (faithfulness metric)** | 0.908 (avg) | 0.884 (avg) | N/A | 6.2% (4/65 NaN) | Black-box statement parser failed on 4 pairs |
 
@@ -544,7 +544,7 @@ this actually costs to run.
 
 | Component | One-Time / Ingestion Cost | Per-Query Inference Cost | Evaluation Suite Run (80 pairs) |
 |---|---|---|---|
-| Hosted API (Claude 3.5 Sonnet) | $0.00 | ~$0.0063 / query (1,500 input + 120 output tokens) | ~$0.50 (led to credit exhaustion) |
+| Hosted API (Claude Sonnet 4.5) | $0.00 | ~$0.0063 / query (1,500 input + 120 output tokens) | ~$0.50 (led to credit exhaustion) |
 | Local Pipeline (Qwen 3B + BGE-M3) | $0.00 | **$0.00 / query** (Local GPU compute) | **$0.00** |
 | Embedding Generation | $0.00 (Local BGE-M3) | $0.00 (Local BGE-M3 query embed) | $0.00 |
 | Vector Storage (Qdrant Cloud) | $0.00 (Free Tier cluster, 1.2MB payload) | $0.00 | $0.00 |
