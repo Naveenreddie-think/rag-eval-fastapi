@@ -35,12 +35,27 @@ _cross_encoder: CrossEncoder | None = None
 def _get_cross_encoder() -> CrossEncoder:
     global _cross_encoder
     if _cross_encoder is None:
-        if os.path.isdir(_FINETUNED_CROSS_ENCODER_PATH):
+        weight_file = os.path.join(_FINETUNED_CROSS_ENCODER_PATH, "model.safetensors")
+        is_valid_finetuned = (
+            os.path.isdir(_FINETUNED_CROSS_ENCODER_PATH)
+            and os.path.isfile(weight_file)
+            and os.path.getsize(weight_file) > 1_000_000
+        )
+        if is_valid_finetuned:
             print(f"Loading domain-adapted fine-tuned cross-encoder from {_FINETUNED_CROSS_ENCODER_PATH}")
             _cross_encoder = CrossEncoder(_FINETUNED_CROSS_ENCODER_PATH, device="cuda")
         else:
-            print(f"Fine-tuned reranker not found at {_FINETUNED_CROSS_ENCODER_PATH} -- "
-                  f"falling back to off-the-shelf {_FALLBACK_CROSS_ENCODER_NAME}")
+            if os.path.isdir(_FINETUNED_CROSS_ENCODER_PATH):
+                print(
+                    f"Directory {_FINETUNED_CROSS_ENCODER_PATH} exists but model.safetensors is missing "
+                    f"or too small (likely an unpulled Git LFS pointer stub) -- "
+                    f"falling back to off-the-shelf {_FALLBACK_CROSS_ENCODER_NAME}"
+                )
+            else:
+                print(
+                    f"Fine-tuned reranker directory not found at {_FINETUNED_CROSS_ENCODER_PATH} -- "
+                    f"falling back to off-the-shelf {_FALLBACK_CROSS_ENCODER_NAME}"
+                )
             _cross_encoder = CrossEncoder(_FALLBACK_CROSS_ENCODER_NAME, device="cuda")
     return _cross_encoder
 
